@@ -5,7 +5,10 @@ public class MemberDTO {
 	private String name;
 	private String addr;
 	private String procile_pic;
+	private String intro;
 	private int closet_num;
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -30,6 +33,12 @@ public class MemberDTO {
 	public void setProcile_pic(String procile_pic) {
 		this.procile_pic = procile_pic;
 	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
 	public int getCloset_num() {
 		return closet_num;
 	}
@@ -38,8 +47,9 @@ public class MemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", name=" + name + ", addr=" + addr + ", procile_pic=" + procile_pic
-				+ ", closet_num=" + closet_num + "]";
+		return "MemberDTO [id=" + id + ", name=" + name + ", addr=" + addr + ", procile_pic=" + procile_pic + ", intro="
+				+ intro + ", closet_num=" + closet_num + "]";
 	}
+	
 	
 }
