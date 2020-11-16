@@ -37,6 +37,7 @@
 	<c:set var="checkLike" value="${requestScope.checkLike}"></c:set>
 	<c:set var="likeList" value="${requestScope.likeList}"></c:set>
 	<c:set var="id" value="${sessionScope.id}"></c:set>
+	<c:set var="ownerId" value="${requestScope.ownerId }"/>
 	
 	<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
 	<div id="wrapper" class="my-4">
@@ -98,14 +99,16 @@
 							</div>
 							
 							<!-- 회원정보, 옷장정보 수정 버튼 -->
+							<c:choose>
+							<c:when test="${id eq ownerId }">
 							<div id="button">
 								<button id="memberEditBtn" onclick="location.href='<%=request.getContextPath()%>/myInfoEditPage.my?id=${member.id}'" type="button">회원정보 수정</button>
 								<button id="closetEditBtn" value="${closet.closet_content}" type="button">옷장정보 수정</button>
 								<button id="cancleBtn" value="${closet.closet_content}" type="button" hidden="hidden">취소</button>
-								
 								<button id="editBtn" value="${closet.closet_content}" type="button" hidden="hidden">수정</button>
-								
 							</div>
+							</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</div>
@@ -118,7 +121,11 @@
 							<label for="tab1">판매목록</label>
 							<input id="tab2" type="radio" name="tabs">
 							<label class="mrAuto" for="tab2">찜목록</label>
+							<c:choose>
+							<c:when test="${id eq ownerId }">
 							<button class="btn" onclick="location.href='<%=request.getContextPath()%>/ProductUploadPage.Pd'">상품등록</button>
+							</c:when>
+							</c:choose>
 						</div>
 					</div>
 					

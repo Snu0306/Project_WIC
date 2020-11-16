@@ -56,7 +56,7 @@
 						<img src="upload/${product.files.files_name}">
 					<div class="overlay">
 						<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product.prd_num}">
-						<h3>${product.prd_title}</h3>
+						<h3 class="ml-4">${product.prd_title}</h3>
 						</a>
 						<p> ${product.prd_content} </p>
 					<c:choose>	

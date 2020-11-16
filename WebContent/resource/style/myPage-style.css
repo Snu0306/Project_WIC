@@ -194,7 +194,8 @@ input:checked + label{
    display: flex ;
    flex-wrap: wrap;
    padding: 0 4px;
-
+   overflow: scroll;
+	height:500px;
 }
 .inner-grid {
    flex: 25%;

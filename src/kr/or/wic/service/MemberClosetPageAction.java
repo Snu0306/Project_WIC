@@ -60,7 +60,8 @@ public class MemberClosetPageAction implements Action {
 		request.setAttribute("closet", closet);
 		request.setAttribute("productList", productList);
 		request.setAttribute("cartProductList", cartProductList);
-
+		request.setAttribute("ownerId", id);
+		
 		viewpage = "MyCloset.jsp";
 		forward.setPath(viewpage);
 		return forward;
