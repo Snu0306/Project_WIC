@@ -13,6 +13,12 @@ import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.service.IntoMainPageAction;
 import kr.or.wic.service.MemberCheckIdAction;
+<<<<<<< HEAD
+=======
+import kr.or.wic.service.MemberClosetPageAction;
+import kr.or.wic.service.MypageMemberEditAction;
+import kr.or.wic.service.MypageMemberEditPageAction;
+>>>>>>> d8601f5f8ee9891dbc4d6af43cc91dcfa3e6baf2
 import kr.or.wic.service.MemberLogInAction;
 import kr.or.wic.service.MemberRegisterAction;
 import kr.or.wic.service.MyCartAddAction;
@@ -81,8 +87,12 @@ public class MemberController extends HttpServlet {
     		action = new MyCartAddAction();
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/Like.my")) { //좋아요 (사람)
+    	
     		
-    	}//좋아요 완료 
+    	} else if(url_Command.equals("/memberClosetPage.my")) {
+    		action = new MemberClosetPageAction();
+    		forward = action.execute(request, response);
+    	}
     	
     	if(forward!=null) {
     	RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
