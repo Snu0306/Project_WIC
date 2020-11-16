@@ -13,12 +13,7 @@ import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.service.IntoMainPageAction;
 import kr.or.wic.service.MemberCheckIdAction;
-<<<<<<< HEAD
-=======
 import kr.or.wic.service.MemberClosetPageAction;
-import kr.or.wic.service.MypageMemberEditAction;
-import kr.or.wic.service.MypageMemberEditPageAction;
->>>>>>> d8601f5f8ee9891dbc4d6af43cc91dcfa3e6baf2
 import kr.or.wic.service.MemberLogInAction;
 import kr.or.wic.service.MemberRegisterAction;
 import kr.or.wic.service.MyCartAddAction;
