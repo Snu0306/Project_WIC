@@ -200,8 +200,8 @@ p .{
 						<a href="<%=request.getContextPath() %>/memberClosetPage.my?id=${member.id}">
 						<img src="upload/${member.profile_pic }"
 							class="pictop5 w-100 h-100 "></a>
+						
 				<p class="text-center mt-2">${member.name}</p>
-				
 					</div>
 				</div>
 				</c:forEach>
