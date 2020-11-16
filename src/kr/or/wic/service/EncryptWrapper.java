@@ -1,14 +1,9 @@
 package kr.or.wic.service;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Base64;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -19,7 +14,8 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		super(request);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 	@Override
 	public String getParameter(String key) {
 		String value="";
@@ -27,24 +23,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
             value = super.getParameter("pwd");
             System.out.println("value :"+value);
             value = getSha512(value);
-        }else if(key!=null && key.equals("password")) {
-        	try {
-				ServletInputStream sis = super.getInputStream();
-				DataInputStream dis = new DataInputStream(sis);
-				InputStreamReader isr = new InputStreamReader(dis);
-				BufferedReader reader = new BufferedReader(isr);
-				while(reader.readLine()!=null) {
-					System.out.println(reader.readLine());
-					System.out.println(reader.readLine().indexOf("pwd"));
-					
-				};
-				
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	
         }
         else {
             //password가 아닌 값들은 특정한 처리를 하지않고 그냥 value에 넣는다.

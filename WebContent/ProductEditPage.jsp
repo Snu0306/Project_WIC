@@ -10,8 +10,9 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="resource/javascript/bootstrap.bundle.js"></script> 
 	<script src="resource/javascript/ProductEditPage.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+	
 </head>
-
 <body>
 <!-- Top -->
 <jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
@@ -24,7 +25,7 @@
 <!-- Left -->
 <div class="container content my-4">
 	<div class="row py-4">
-		<h1 class="mx-auto py-4 ">Product(EDIT)</h1>
+		<h1 class="mx-auto py-4 ">Product(EDIT)</h1><sapn><i class="mt-2 mr-4 fas fa-times"></i></sapn>
 	</div>
 	<form action="<%=request.getContextPath()%>/ProductEdit.Pd" method="post" id="upload">
 		<div class="row">
@@ -97,4 +98,10 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+	
+	<script type="text/javascript">
+		$('.fa-times').on('click',function(){
+			location.href='<%=request.getContextPath()%>/myPage.my';
+		})
+	</script>
 </html>

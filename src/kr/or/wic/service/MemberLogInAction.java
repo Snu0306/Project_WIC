@@ -27,8 +27,8 @@ public class MemberLogInAction implements Action{
 		response.setContentType("text/html;charset=UTF-8");
 		
 		String id=request.getParameter("id");
-		String pwd=request.getParameter("pwd");
-		System.out.println(pwd);
+		String pwd=(String) request.getAttribute("pwd");
+		System.out.println("pwd : "+pwd);
 		MemberDAO memberDao = new MemberDAO();
 		MemberDTO memberDto = memberDao.signedIn(id, pwd);
 		

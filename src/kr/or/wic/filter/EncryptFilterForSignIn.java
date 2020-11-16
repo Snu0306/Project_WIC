@@ -44,8 +44,8 @@ public class EncryptFilterForSignIn implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		EncryptWrapper encW = new EncryptWrapper(req);
 		System.out.println(encW.getParameter("pwd"));
-		encW.getParameter("pwd");
-		
+		String pwd = encW.getParameter("pwd");
+		request.setAttribute("pwd", pwd);
 		
 		chain.doFilter(request, response);
 	}

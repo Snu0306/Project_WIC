@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="resource/style/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="resource/javascript/bootstrap.min.js"></script>
-<link rel="stylesheet" href="resource/style/top-style.css">
-<link rel="stylesheet" href="resource/style/bottom-style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
 <script type="text/javascript">
 </script>
@@ -129,9 +127,9 @@ p .{
 	<div class="section">
 		<div class="container mt-4 mx-auto">
 			<div class="row">
-				<div class="col-6 ">
+				<div class="col-md-6">
 					<div class="logos">
-						<div class="col-12">
+						<div class="col-md-12">
 							<h1>
 								What's In Your <br>Closet
 							</h1>
@@ -141,11 +139,10 @@ p .{
 						<div class="search_wrap">
 							<input class="text" id="productName" type="text" name="search"> 
 							<button type="submit">search</button>
-							<input type="button" value="검색" >
 						</div>
 					</form>
 				</div>
-				<div class="col-6 justify-content-between">
+				<div class="col-md-6 justify-content-between">
 					<div class="img">
 
 						<div id="carouselExampleIndicators" class="carousel slide"
@@ -197,12 +194,14 @@ p .{
 			<h1 class="text-center mb-4"> TOP 5 </h1>
 			<div class="row justify-content-between">
 				<c:set var="Top5" value="${requestScope.Top5 }"/>
-				<c:forEach var="member" items="${Top5 }">
-				<div class="col-md-2 mx-2">
+				<c:forEach var="member" items="${Top5}">
+				<div class="col-md-2 row mx-2">
 					<div class="cercle mx-auto">
+						<a href="<%=request.getContextPath() %>/memberClosetPage.my?id=${member.id}">
 						<img src="upload/${member.profile_pic }"
-							class="pictop5 w-100 h-100 ">
-				<a href="<%=request.getContextPath() %>/"></a>		<p class="text-center mt-2">${member.name }</p>
+							class="pictop5 w-100 h-100 "></a>
+				<p class="text-center mt-2">${member.name}</p>
+				
 					</div>
 				</div>
 				</c:forEach>

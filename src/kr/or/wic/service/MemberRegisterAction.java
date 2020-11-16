@@ -47,8 +47,11 @@ public class MemberRegisterAction implements Action{
 		Enumeration filenames = multi.getFileNames();
 		filename = multi.getFilesystemName((String)filenames.nextElement());
 		
+			
+		String pwd = EncryptWrapper.getSha512(multi.getParameter("pwd"));
+		
 		memberDto.setId(multi.getParameter("id"));
-		memberDto.setPwd(multi.getParameter("pwd"));
+		memberDto.setPwd(pwd);
 		memberDto.setName(multi.getParameter("name"));
 		memberDto.setAddr(multi.getParameter("addr"));
 		memberDto.setProfile_pic(filename);

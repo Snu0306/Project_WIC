@@ -22,12 +22,16 @@ public class MemberClosetPageAction implements Action {
 		
 		String viewpage = "";
 		ActionForward forward = new ActionForward();
-		int prd_num = Integer.parseInt(request.getParameter("prd_num"));
-		
-		//id값 받아오기
+		String id="";
 		ProductDAO pdao = new ProductDAO();
-		String id = pdao.getIdByPrdNum(prd_num);
 		
+		try {
+		int prd_num = Integer.parseInt(request.getParameter("prd_num"));
+			//id값 받아오기
+			id = pdao.getIdByPrdNum(prd_num);
+		}catch(NumberFormatException e) {
+			id = request.getParameter("id");
+		}
 		//해당 회원의 옷장 정보를 가지고 들어가야
 		//Left: 회원의 name, profile_pic, addr, Like_Record 테이블의 get_id 수 count, 옷장 테이블(closet_num과 일치하는)의 closet_title, closet_content
 		//Right: Product테이블의 해당 회원의 closet_num과 일치하는 product 객체(prd_num(링크 시 prd_num을 파라미터로), +필요한 정보만), files에서 prd_num의 첫번째 사진 파일의 file_name
