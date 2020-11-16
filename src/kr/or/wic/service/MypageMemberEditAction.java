@@ -43,6 +43,7 @@ public class MypageMemberEditAction implements Action{
 				e.printStackTrace();
 				System.out.println("여긴가?");
 			} //파일 업로드 완료
+
 			
 			String id = multi.getParameter("id");
 			String pwd = multi.getParameter("pwd");
@@ -52,6 +53,7 @@ public class MypageMemberEditAction implements Action{
 			Enumeration filenames = multi.getFileNames();	
 			String file = (String)filenames.nextElement();
 			String profile_pic = multi.getFilesystemName(file);
+			
 			
 			MemberDAO memberdao = new MemberDAO();
 			memberdao.updateMember(id, pwd, name, addr, profile_pic);
