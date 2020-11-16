@@ -12,7 +12,7 @@
 	clear:both;
 }
 
-#searchbar{
+#search{
 	height:50px;
     font-size:14pt;
     padding: 20px; 
@@ -23,7 +23,7 @@
 	color: white;
 }
 
-#searchbar::placeholder{
+#search::placeholder{
 	color:white;
 }
 

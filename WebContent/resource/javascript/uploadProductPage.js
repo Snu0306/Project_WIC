@@ -133,15 +133,11 @@ $(function(){
 			var formData = new FormData(); 
 			formData.append("filelist",bin)
 			
-			}
+			};
 		reader.readAsDataURL(file);
 	};
 	
-	$('input[name="fileProfile"]').on('click',function(){
-		location.href="/myPage.my"
-	})
-	
-	
+
 	
 	
 	

@@ -31,10 +31,10 @@
 	
 	<div id="wrapper" class="my-4">
 	<div class="col-md-8 mx-auto my-4">
-		<form action="" id="search" name="search" method="get">
+		<form action="<%=request.getContextPath()%>/ProductSearchPage.Pd" id="searchFrm" name="searchFrm" method="get">
 			<div class="inner-form row"> 
 				<div class="col-md-9">
-				<input class="col-md-12" type="text" id="searchbar" name="searchbar"
+				<input class="col-md-12" type="text" id="search" name="search"
 					placeholder="Type KeyWord's">
 				</div>
 				<div class="col-md-2">

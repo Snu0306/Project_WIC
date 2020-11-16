@@ -29,20 +29,6 @@ public class ProductSearchPageAction implements Action{
 		ActionForward forward = new ActionForward();
 		request.setAttribute("productList", alist);
 		
-		/*
-		 * 본 service에서 해당 회원과 관리자만 접근이 가능하게 하는 기능을 여기서 구현할지 결정해야
-		String id = (String)request.getSession().getAttribute("id");
-		if(id == null || !id.equals("admin")) {
-			viewpage = "/WEB-INF/LoginRegister/Login.jsp";
-			forward.setPath(viewpage);
-			return forward;
-		}
-		*/
-		
-		//DAO, DTO 처리
-		
-
-		
 		//이동경로(viewpage)
 		viewpage = "ProductListPage.jsp";
 		forward.setPath(viewpage);

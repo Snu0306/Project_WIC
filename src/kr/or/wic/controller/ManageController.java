@@ -43,12 +43,6 @@ public class ManageController extends HttpServlet {
     		System.out.println("managePage.Mg");
     		action = new MemberManagementAction();
     		forward = action.execute(request, response);
-    	} else if (url_Command.equals("manageMemberPage.Mg")) { //회원 리스트 페이지 
-    		
-    		
-    	} else if (url_Command.equals("manageMemeberDetailPage.Mg")) { //회원 상세페이지 
-    		
-    		
     	} else if (url_Command.equals("/manageMemberEditPage.Mg")) { //회원 정보 수정페이지 
     		System.out.println("manageMemberEdit.Mg");
     		action = new MemberEditPageAction();
@@ -59,7 +53,7 @@ public class ManageController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("manageMemberEditCancle.Mg")) { //회원 정보 수정 취소
     		
-    		
+    		//지연 했음 
     	} else if (url_Command.equals("/manageMemberDelete.Mg")) { //회원 삭제
     		System.out.println("manageMemberDelte.Mg");
     		action = new MemberDeleteAction();

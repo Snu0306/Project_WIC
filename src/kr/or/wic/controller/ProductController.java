@@ -49,7 +49,7 @@ public class ProductController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/uploadProductCancle.Pd")) { //상품 등록 취소  
     		
-    		
+    	
     	} else if (url_Command.equals("/ProductListPage.Pd")) { //상품 목록 페이지
     		action = new ProductListPageAction();
     		forward = action.execute(request, response);
@@ -58,13 +58,13 @@ public class ProductController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/ProductAskPage.Pd")) { //상품 문의하기 페이지 
     		
-    		
+    		//재형 민찬 지연 
     	} else if (url_Command.equals("/ProductAsk.Pd")) { //상품 문의하기 
     		
-    		
+    		//재형 민찬  지연    		
     	} else if (url_Command.equals("/ProductAskCancle.Pd")) { //상품 문의 취소하기
     		
-    		
+    		//재형 민찬   지연   		
     	} else if (url_Command.equals("/ProductEditPage.Pd")) { //상품 수정 페이지
     		action = new ProductEditPageAction();
     		forward = action.execute(request, response);
@@ -73,11 +73,11 @@ public class ProductController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/ProductEditCancle.Pd")) { //상품 수정 취소 
     		
-    		
+    		//선규형
     	} else if (url_Command.equals("/ProductSearchPage.Pd")) { //상품 검색 
     		action = new ProductSearchPageAction();
     		forward = action.execute(request, response);
-    		
+    		//선우 확인 
     	}
     	
     	if(forward != null) {

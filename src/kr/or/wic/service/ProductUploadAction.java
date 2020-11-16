@@ -34,15 +34,22 @@ public class ProductUploadAction implements Action{
 		ProductDAO pdao = new ProductDAO();
 		pdao.insertProduct(pdto);
 		
+		
+		
 		//file 정보에 prd_num 입력
 		int prd_num = new ProductDAO().getPrd_seqCurrval();
 		FilesDAO fdao = new FilesDAO();
 		fdao.updateFilePrd_num(prd_num, id);
 		
+		String msg ="업로드 성공";
+		String url ="/myPage.my";
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("url", url);
+		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/myPage.my");
-		
-		
+		forward.setPath("Redirect.jsp");
+		System.out.println("ProductWrite 실행 완료");
 		return forward;
 	}
 

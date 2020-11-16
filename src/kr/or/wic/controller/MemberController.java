@@ -81,7 +81,7 @@ public class MemberController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/Like.my")) { //좋아요 (사람)
     		
-    	}
+    	}//좋아요 완료 
     	
     	if(forward!=null) {
     	RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());

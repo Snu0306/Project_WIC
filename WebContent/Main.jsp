@@ -133,7 +133,7 @@ p .{
 							</h1>
 						</div>
 					</div>
-					<form action="ProductSearchPage.Pd" method="get">
+					<form action="<%=request.getContextPath()%>/ProductSearchPage.Pd" method="get">
 						<div class="search_wrap">
 							<input class="text" id="productName" type="text" name="search"> 
 							<button type="submit">search</button>

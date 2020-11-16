@@ -1,5 +1,6 @@
 package kr.or.wic.dao;
 
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import kr.or.wic.dto.ClosetDTO;
 import kr.or.wic.dto.FilesDTO;
 import kr.or.wic.dto.ProductDTO;
 
@@ -505,7 +505,7 @@ public class ProductDAO {
 			//리스트 초기화 
 			try {
 				conn = ds.getConnection();
-				String sql = "select * from product where prd_title like '%'||?||'%'";
+				String sql = "SELECT * FROM (select * from product where prd_title like '%'||?||'%') a JOIN files f ON a.prd_num = f.prd_num";
 				pstmt = conn.prepareStatement(sql);//연결된 데이터베이스를 넣어줌 
 				pstmt.setString(1,productName); //? 안에 파라미터값 넣어줌 
 				System.out.println("1"+productName);
@@ -522,6 +522,9 @@ public class ProductDAO {
 					product.setPrd_state(rs.getInt("Prd_state"));
 					product.setPrd_count(rs.getInt("Prd_count"));
 					product.setCloset_num(rs.getInt("Closet_num"));
+					FilesDTO files = new FilesDTO();
+					files.setFiles_name(rs.getNString("files_name"));
+					product.setFiles(files);
 					productList.add(product);
 				}
 				

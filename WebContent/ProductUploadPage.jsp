@@ -77,7 +77,8 @@
 			</div>
 			<div class ="row mx-auto">
 			<input class="col-md-3 mx-auto mb-3" type="submit" id="submit" name="submit" value="UPLOAD">
-			<input class="col-md-3 mx-auto mb-3" type="reset" id="reset" name="reset" value="CANCLE">
+			<input class="col-md-3 mx-auto mb-3" type="button" value="CANCLE" onClick="location.href='<%=request.getContextPath()%>/myPage.my';">
+			
 			</div>
 		</form>
 		<input type="file" id="fileProfile" name="fileProfile" accept="image/*" multiple >
