@@ -20,29 +20,15 @@
 	<link rel="stylesheet" href="resource/style/bootstrap-grid.css">
 	<link rel="stylesheet" href="resource/style/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="resource/javascript/ProductListPage.js"></script>
 	<script src="resource/javascript/bootstrap.bundle.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-	<script src="resource/javascript/ProductListPage.js"></script>
-	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 	<link rel="stylesheet" href="resource/style/productListPage-style.css">
 	
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
-	<div class="site-blocks-cover overlay inner-page-cover w-100"
-			style="background-image: url(resource/image/img_001.jpg);" data-aos="fade"
-			data-stellar-background-ratio="0.5">
-			<div class="container" style="width:100%">
-			<div
-				class="row align-items-center justify-content-center text-center">
-				<div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-						<h1 class="text-white">Product</h1>
-						<a href="Main.jsp">Home</a><span class="mx-2 text-white">&bullet;</span>
-					<span class="text-white">Product</span>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<div id="wrapper" class="my-4">
 	<div class="col-md-8 mx-auto my-4">
 		<form action="" id="search" name="search" method="get">
@@ -72,10 +58,10 @@
 						<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product.prd_num}">
 						<h3>${product.prd_title}</h3>
 						</a>
-						<p> ${product.prd_content}</p>
+						<p> ${product.prd_content} </p>
 					<c:choose>	
 					<c:when test="${empty cartList}">
-							<button class="far fa-heart like" id="like" value="${product.prd_num}"></button>
+							<button class="far fa-heart like" value="${product.prd_num}"></button>
 					</c:when>	
 					 <c:otherwise>	
 					<c:forEach var="cart" items="${cartList}">
@@ -91,7 +77,6 @@
 					</c:forEach>
 					</c:otherwise>
 					</c:choose>
-						<button onclick="location.href='<%=request.getContextPath() %>/ProductDetailPage.Pd?prd_num=${product.prd_num}'">상세보기</button>
 					</div>	
 				</div>
 			</c:forEach>

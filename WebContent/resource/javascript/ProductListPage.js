@@ -1,16 +1,13 @@
 $(function(){
 
-var $grid = $('.grid').masonry({
+ $('.grid').masonry({
 		  // options
 		  itemSelector:'.grid-item',
 		 percentPosition: true,
 		  columnWidth: '.grid-sizer'
 });
 
-$grid.imagesLoaded().progress(function() {
-  $grid.masonry();
-});  
-		
+	
 		
 $('.like').on("click",function(){
 			if($(this).hasClass('far')){

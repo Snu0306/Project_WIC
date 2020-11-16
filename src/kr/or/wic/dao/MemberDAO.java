@@ -208,22 +208,28 @@ public class MemberDAO {
 	//update member's info from Adminn
 	public int updateMember(String name, String addr, String profile_pic, String id) {
 		int result=0;
+		String sql;
 		try {
 			conn=ds.getConnection();
-			String sql="update member name=?,addr=?,profile_pic=? where id=?";
+			if(profile_pic == null) {
+				sql="update member set name=?,addr=? where id=?";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, addr);
+				pstmt.setString(3, id);
+				result=pstmt.executeUpdate();
+			}else {
+			sql="update member set name=?,addr=?,profile_pic=? where id=?";
 			pstmt=conn.prepareStatement(sql);
-			
+			System.out.println(name);
+			System.out.println(addr);
+			System.out.println(id);
 			pstmt.setString(1, name);
 			pstmt.setString(2, addr);
-			
-			if(profile_pic!=null) {
-				pstmt.setString(3, profile_pic);
-			}else {
-				MemberDTO memberDto=getMemberById(id);
-				pstmt.setString(3, memberDto.getProfile_pic());
-			}
+			pstmt.setString(3, profile_pic);
 			pstmt.setString(4, id);
 			result=pstmt.executeUpdate();
+			}
 			}catch (SQLException e) {
 				System.out.println("update member error:"+e.getMessage());
 				e.printStackTrace();
@@ -244,16 +250,29 @@ public class MemberDAO {
 			
 			try {
 				conn=ds.getConnection();
-				String sql="update member set id=?, pwd=?, name=?,addr=?,profile_pic=? where id=?";
+				String sql;
+				if(profile_pic==null) {
+					sql="update member set pwd=?, name=?,addr=? where id=?";
+					pstmt=conn.prepareStatement(sql);
+					
+					pstmt.setString(1, pwd);
+					pstmt.setString(2, name);
+					pstmt.setString(3, addr);
+					pstmt.setString(4, id);
+					result=pstmt.executeUpdate();
+				}else {
+				
+				sql="update member set pwd=?, name=?,addr=?,profile_pic=? where id=?";
 				pstmt=conn.prepareStatement(sql);
 				
-				pstmt.setString(1, id);
-				pstmt.setString(2, pwd);
-				pstmt.setString(3, name);
-				pstmt.setString(4, addr);
-				pstmt.setString(5, profile_pic);
+				pstmt.setString(1, pwd);
+				pstmt.setString(2, name);
+				pstmt.setString(3, addr);
+				pstmt.setString(4, profile_pic);
+				pstmt.setString(5, id);
 				
 				result=pstmt.executeUpdate();
+				}
 			}catch (SQLException e) {
 				System.out.println("update member error");
 				e.printStackTrace();

@@ -137,7 +137,9 @@ $(function(){
 		reader.readAsDataURL(file);
 	};
 	
-	
+	$('input[name="fileProfile"]').on('click',function(){
+		location.href="/myPage.my"
+	})
 	
 	
 	
