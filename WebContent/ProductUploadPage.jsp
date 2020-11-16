@@ -21,6 +21,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="resource/javascript/bootstrap.bundle.js"></script> 
 	<script src="resource/javascript/uploadProductPage.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 <c:set var="addr" value="${requestScope.addr }"/>
 	<div class="container content my-4">
 		<div class="row py-4">
-			<h1 class="mx-auto py-4 ">Product</h1>
+			<h1 class="mx-auto py-4 ">Product</h1><sapn><i class="mt-2 mr-4 fas fa-times"></i></sapn>
 		</div>
 		<form action="<%=request.getContextPath()%>/ProductUpload.Pd" method="post" id="upload">
 			<div class="row">
@@ -77,7 +78,6 @@
 			</div>
 			<div class ="row mx-auto">
 			<input class="col-md-3 mx-auto mb-3" type="submit" id="submit" name="submit" value="UPLOAD">
-			<input class="col-md-3 mx-auto mb-3" type="button" value="CANCLE" onClick="location.href='<%=request.getContextPath()%>/myPage.my';">
 			
 			</div>
 		</form>
@@ -96,5 +96,9 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
-
+	<script type="text/javascript">
+		$('.fa-times').on('click',function(){
+			location.href='<%=request.getContextPath()%>/myPage.my';
+		})
+	</script>
 </html>

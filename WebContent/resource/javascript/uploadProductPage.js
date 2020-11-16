@@ -137,7 +137,6 @@ $(function(){
 		reader.readAsDataURL(file);
 	};
 	
-
 	
 	
 	

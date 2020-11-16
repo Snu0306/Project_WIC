@@ -459,7 +459,7 @@ public class MemberDAO {
 			conn = ds.getConnection();
 			String sql = "select * \r\n" + 
 					"from(\r\n" + 
-					"select rownum as rnum, name, loginCount, id\r\n" + 
+					"select rownum as rnum, name, loginCount, id, profile_pic\r\n" + 
 					"from member\r\n" + 
 					"order by loginCount desc)\r\n" + 
 					"where 1<=rnum and rnum<=5";
@@ -470,6 +470,7 @@ public class MemberDAO {
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
 				dto.setLoginCount(rs.getInt("loginCount"));
+				dto.setProfile_pic(rs.getNString("profile_pic"));
 				dtos.add(dto);
 				System.out.println(dto);
 			}	

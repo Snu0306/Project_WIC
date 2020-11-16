@@ -28,6 +28,10 @@ div>input {
 #fileProfile{
 	visibility : hidden;
 }
+.fa-times{
+	float:right;
+	font-size:20pt;
+}
 
 
 /* #fileProfile, #uploadfile{

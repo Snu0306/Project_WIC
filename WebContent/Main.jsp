@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +16,8 @@
 <link rel="stylesheet" href="resource/style/top-style.css">
 <link rel="stylesheet" href="resource/style/bottom-style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+<script type="text/javascript">
+</script>
 </head>
 <style>
 .section {
@@ -190,43 +194,19 @@ p .{
 
 	<div class="section">
 		<div class="container  mx-auto ">
+			<h1 class="text-center mb-4"> TOP 5 </h1>
 			<div class="row justify-content-between">
-				<div class="col-md-2 mx-2 ">
-					<div class="cercle mx-auto">
-						<img src="resource/image/Main_IMG_5.jpeg"
-							class=" pictop5 w-100 h-100 ">
-						<p class="mx-5">서현진</p>
-					</div>
-					<p class="text-center"></p>
-				</div>
+				<c:set var="Top5" value="${requestScope.Top5 }"/>
+				<c:forEach var="member" items="${Top5 }">
 				<div class="col-md-2 mx-2">
 					<div class="cercle mx-auto">
-						<img src="resource/image/Main_IMG_4.jpeg"
+						<img src="upload/${member.profile_pic }"
 							class="pictop5 w-100 h-100 ">
-						<p class="mx-5">현빈</p>
+				<a href="<%=request.getContextPath() %>/"></a>		<p class="text-center mt-2">${member.name }</p>
 					</div>
 				</div>
-				<div class="col-md-2 mx-2">
-					<div class="cercle mx-auto">
-						<img src="resource/image/Main_IMG_1.jpeg"
-							class="pictop5 w-100 h-100 ">
-						<p class="mx-5">아이유</p>
-					</div>
-				</div>
-				<div class="col-md-2 mx-2">
-					<div class="cercle mx-auto">
-						<img src="resource/image/Main_IMG_2.jpeg"
-							class="pictop5 w-100 h-100 ">
-						<p class="mx-5">오프리</p>
-					</div>
-				</div>
-				<div class="col-md-2 mx-2">
-					<div class="cercle mx-auto">
-						<img src="resource/image/Main_IMG_3.jpeg"
-							class="pictop5 w-100 h-100 ">
-						<p class="mx-5">정유미</p>
-					</div>
-				</div>
+				</c:forEach>
+				
 			</div>
 
 
