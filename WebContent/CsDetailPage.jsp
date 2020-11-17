@@ -96,7 +96,7 @@
 	                             </c:if>
                              
 	                             <c:if test="${sessionId == dto.id || sessionId eq 'admin@admin.com'}">
-	                             	<a href="./contact-us-write.html"> 
+	                             	<a href="<%=request.getContextPath()%>/csDelete.cs?cs_num=${dto.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}"> 
 	                                	<button type="button"  class="btn btn-primary mt-2 ">삭제</button>
 	                              	</a>
 	                              	<a href="<%=request.getContextPath()%>/csEditPage.cs?cs_num=${dto.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}">

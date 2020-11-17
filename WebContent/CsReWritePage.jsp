@@ -60,10 +60,10 @@
       <div class="row">
           <div class="col-md-12">
                   <form action="<%=request.getContextPath()%>/csReWrite.cs?currentPage=${currentPage}&pageSize=${pageSize}" method="post" >
-                  	  <input type="hidden" type="text" name="cs_num" value="${csDto.cs_num}">
-                  	  <input type="hidden" type="text" name="cs_refer" value="${csDto.cs_reffer}">
-                  	  <input type="hidden" type="text" name="cs_depth" value="${csDto.cs_depth}">
-                  	  <input type="hidden" type="text" name="cs_step" value="${csDto.cs_step}">
+                  	  <input hidden type="text" name="cs_num" value="${csDto.cs_num}">
+                  	  <input hidden type="text" name="cs_refer" value="${csDto.cs_reffer}">
+                  	  <input hidden type="text" name="cs_depth" value="${csDto.cs_depth}">
+                  	  <input hidden type="text" name="cs_step" value="${csDto.cs_step}">
                   	  
                       <fieldset class="p-4">
                           <div class="form-group">
