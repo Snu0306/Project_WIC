@@ -131,8 +131,10 @@
 					
 					<!-- 판매 상품 목록 -->
 					<div class="outer-grid">
+
 					
 						<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+
 							<div class="inner-grid">
 									<img src="upload/${productList[i].files.files_name}">
 								<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${productList[i].prd_num}">
@@ -255,11 +257,10 @@ $(document).ready(function(){
 	//판매목록, 찜목록
 	$("input[name=tabs]").change(function(e) {
 		if(e.target.id == 'tab1'){
-			$(".outer-grid").html('<c:forEach var="product" items="${productList}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product.prd_num}"><img src="upload/${product.files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;30</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
+			$(".outer-grid").html('<c:forEach var="i" begin="0" end="${fn:length(productList)}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product[i].prd_num}"><img src="upload/${productList[i].files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;${likeList[i]}</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
 		} else {
-			$(".outer-grid").html('<c:forEach var="cartProduct" items="${cartProductList}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${cartProduct.prd_num}"><img src="upload/${cartProduct.files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;30</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
+			$(".outer-grid").html('<c:forEach var="i" begin="0" end="${fn:length(cartProductList)}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${cartProductList[i].prd_num}"><img src="upload/${cartProductList[i].files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;${cartLikeList[i]}</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
 		}
-			
 	});
 </script>
 <script>
