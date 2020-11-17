@@ -16,6 +16,8 @@ import kr.or.wic.service.LikeSendAjaxAction;
 import kr.or.wic.service.MemberDetailInfoAction;
 import kr.or.wic.service.ProductFileDeleteAjaxAction;
 import kr.or.wic.service.ProductUploadAjaxAction;
+import kr.or.wic.service.SaleStateNoAjaxAction;
+import kr.or.wic.service.SaleStateOnAjaxAction;
 
 /*
  * 비동기 관련 컨트롤러 
@@ -57,6 +59,12 @@ public class AjaxController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/memberInfo.Ajax")) { //좋아요 취소하기
     		action = new MemberDetailInfoAction();
+    		forward = action.execute(request, response);
+    	} else if (url_Command.equals("/notToSale.Ajax")) { //판매완료로 바꾸기
+    		action = new SaleStateNoAjaxAction();
+    		forward = action.execute(request, response);
+    	} else if (url_Command.equals("/toSale.Ajax")) { //판매중으로 바꾸기
+    		action = new SaleStateOnAjaxAction();
     		forward = action.execute(request, response);
     	}
     	

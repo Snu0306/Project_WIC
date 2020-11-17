@@ -36,6 +36,7 @@
 <c:set var="getLike" value="${requestScope.getLike}"></c:set>
 <c:set var="checkLike" value="${requestScope.checkLike}"></c:set>
 <c:set var="id" value="${sessionScope.id}"></c:set>
+<c:set var="saleState" value="${requestScope.saleState}"></c:set>
 
 <div class="mb-5"></div>
 <div class="container">
@@ -131,7 +132,17 @@
 						</c:choose>
 						<span id="cnt">${getLike}</span>
 					</div>
-					<button id="edit" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+					<button id="edit" class="btn btn-primary edit" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+					
+					<!-- 판매 상태 변경 -->
+					<c:choose>
+						<c:when test="${saleState eq 0}">
+							<button id="saleState" class="btn btn-success" aria-hidden="true">판매중</button>
+						</c:when>
+						<c:otherwise>
+							<button id="saleState" class="btn btn-danger" aria-hidden="true">판매완료</button>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="mb-3">
@@ -203,7 +214,49 @@
 $(document).ready(function() {
 	if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {
 		$("#edit").hide();
-	}
+	} else {
+		$('#saleState').click(function(e) {
+			if($(this).hasClass('btn-success')){
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/notToSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							console.log(responsedata);
+							console.log(textStatus);
+							console.log(xhr);
+							$("#saleState").attr('class', 'btn btn-danger');
+							$("#saleState").html('판매완료');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			} else {
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/toSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							console.log(responsedata);
+							console.log(textStatus);
+							console.log(xhr);
+							$("#saleState").attr('class', 'btn btn-success');
+							$("#saleState").html('판매중');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			}
+		});
+	};
 	
 	$("#heart").click(function(e) {
 		if('${id}' != '') {	
