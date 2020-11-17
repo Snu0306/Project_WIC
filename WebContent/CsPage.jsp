@@ -71,13 +71,6 @@
 				<div class="col-md-8">
 				</div>
 				<div class="col-md-2">
-					<form>
-						<select name="showOption" class="form-control" onchange="#ID 또는 NAME">
-								<option selected>전체 글보기</option>
-								<option>공지사항</option>
-								<option>Q&A</option>
-						</select>
-					</form>
 				</div>
 			</div>
 			<br>

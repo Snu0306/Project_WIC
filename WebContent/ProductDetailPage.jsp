@@ -14,12 +14,22 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	
+	
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
 	<style>
-	
+	.modal-header, h4, .close {
+      background-color: #ddc5ee;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+    }
+    .modal-footer {
+      background-color: #f9f9f9;
+    }
 	</style>
 </head>
 
@@ -106,7 +116,7 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-			</div>	
+			</div>	 
 		</div>
 		
 		<!-- Right -->
@@ -141,60 +151,124 @@
 			</div>
 			<div class="mb-2 d-flex justify-content-between">
 				<span class="prdReply">상품문의</span>
-				<button id="ask" class="btn btn-primary">문의하기</button>
+				<a id="modalBtn" href="<%= request.getContextPath()%>/Page.askProduct?prd_num=${product.prd_num}" data-toggle="modal" data-target="#myModal"><input type="button" id="ask" class="btn btn-primary" 
+				data-toggle="modal" data-target="#myModal2" value="문의하기"></a>
 			</div>
-			<div>
-				<!-- 상품문의 테이블 -->
-				<table class="table myTable">
-					<thead class="thead-light">
-						<tr>
-							<th>No.</th>
-							<th>글제목</th>
-							<th>작성자</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td><a href="#">상품 문의드려요.</a></td>
-							<td>문지</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><a href="#">에눌 가능한가요?</a></td>
-							<td>재형이</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<!-- Pagination -->
-				<div class="">
-					<nav aria-label="Page navigation">
-						<ul class="pagination pagination-sm justify-content-center" style="margin-bottom: 0px;">
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+
+
+
+				<div>
+					<!-- 상품문의 테이블 -->
+					<table class="table myTable">
+						<thead class="thead-light">
+							<tr>
+								<th>No.</th>
+								<th>글제목</th>
+								<th>작성자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="dto" items="${requestScope.chatRoomDTOs}">
+								<tr>
+									<td>${dto.ch_num}</td>
+									<td><a href="#">${dto.ch_title}</a></td>
+									<td>${dto.name}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<c:set var="startPage" value="${requestScope.startPage}" />
+					<c:set var="endPage" value="${requestScope.endPage}" />
+					<c:set var="pageSize" value="${requestScope.pageSize}" />
+					<c:set var="currentPage" value="${requestScope.currentPage}" />
+					<c:set var="maxPage" value="${requestScope.maxPage}" />
+
+					<!-- Pagination -->
+					<div class="">
+						<nav aria-label="Page navigation">
+							<ul class="pagination pagination-sm justify-content-center"
+								style="margin-bottom: 0px;">
+								<li class="page-item"><c:if test="${cureentPage > 1}">
+										<a class="page-link" href="#" aria-label="Previous"> <span
+											aria-hidden="true">&laquo;</span>
+										</a>
+									</c:if></li>
+								<c:forEach var="i" begin="${startPage}" end="${endPage}"
+									step="1">
+									<c:choose>
+										<c:when test="${currentPage == i}">
+											<li class="page-item"><a class="page-link">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="#">${i}</a>
+											</li>
+										</c:otherwise>
+
+									</c:choose>
+								</c:forEach>
+								<c:if test="${cureentPage < maxPage }">
+									<li class="page-item"><a class="page-link" href="#"
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
+
+
+	 <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style="position: absolute;">
+	<!-- Modal content-->
+      <div class="modal-content" style="min-width: 1200px; margin: 100px 180px;" >
+        <div class="modal-header" style="padding:25px 35px;">
+          <div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-lock"></span> ct_title</h4><br>
+          </div>
+          <div>
+              <h4>idididi</h4>
+          </div>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" action="<%=request.getContextPath()%>/write.askProduct">
+          	<input type="text" name="prd_num" value=${product.prd_num} hidden>
+            <div class="form-group">
+              <label for="ch-content"><span class="glyphicon glyphicon-user"></span> title</label>
+              <input type="text" class="form-control" name="title">
+            
+              <label for="comment"><span class="glyphicon glyphicon-eye-open"></span> content</label>
+              <input type="text" class="form-control" name="content">
+            </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn-success" value="CONFIRM">
+            <input type="submit" class="btn-danger" value="CANCEL" data-dismiss="modal">
+        </div>
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
 </div>
+
+
 <div class="mb-5"></div>
 <jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
 </body>
 
+ <script>
+    $(document).ready(function(){
+      $("#modalBtn").click(function(){
+        $("#myModal").modal();
+      });
+    });
+</script>
 <script>
 $(document).ready(function() {
 	if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {

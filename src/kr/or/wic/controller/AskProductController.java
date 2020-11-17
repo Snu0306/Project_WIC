@@ -11,22 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.service.MemberDetailInfoAction;
-import kr.or.wic.service.ProductDetailPageAction;
-import kr.or.wic.service.ProductEditAction;
-import kr.or.wic.service.ProductEditPageAction;
-import kr.or.wic.service.ProductListPageAction;
-import kr.or.wic.service.ProductSearchPageAction;
-import kr.or.wic.service.ProductUploadAction;
-import kr.or.wic.service.ProductUploadPageAction;
+import kr.or.wic.service.AskAction;
+import kr.or.wic.service.AskPageAction;
 
 
 
-@WebServlet("*.minchan")
-public class minchan extends HttpServlet {
+@WebServlet("*.askProduct")
+public class AskProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public minchan() {
+    public AskProductController() {
         super();
     }
     
@@ -40,11 +34,16 @@ public class minchan extends HttpServlet {
     	Action action = null;
     	ActionForward forward = null;
     	
-    	
-    	if(url_Command.equals("/admin.minchan")) { //상품 등록 페이지 
-    		action = new MemberDetailInfoAction();
+   
+    	if(url_Command.equals("/page.askProduct")) {
+    		action = new AskPageAction();
+    		forward = action.execute(request, response);		
+    	}else if(url_Command.equals("/write.askProduct")) {
+    		action = new AskAction();
     		forward = action.execute(request, response);		
     	}
+    	
+    	
     	
     	if(forward != null) {
 	    	RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());

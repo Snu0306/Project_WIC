@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.dto.FilesDTO;
-import kr.or.wic.dto.MemberDTO;
-import kr.or.wic.dto.PriceFormat;
-import kr.or.wic.dto.ProductDTO;
+import kr.or.wic.dao.ChatroomDAO;
 import kr.or.wic.dao.FilesDAO;
 import kr.or.wic.dao.Like_RecordDAO;
 import kr.or.wic.dao.MemberDAO;
 import kr.or.wic.dao.ProductDAO;
+import kr.or.wic.dto.ChatroomDTO;
+import kr.or.wic.dto.FilesDTO;
+import kr.or.wic.dto.MemberDTO;
+import kr.or.wic.dto.PriceFormat;
+import kr.or.wic.dto.ProductDTO;
 
 public class ProductDetailPageAction implements Action{
 
@@ -54,6 +56,46 @@ public class ProductDetailPageAction implements Action{
 		//좋아요 여부
 		String send_id = (String)request.getSession().getAttribute("id");
 		int checkLike = ldao.checkLike(send_id, get_id);
+		
+		int currentPage =1; // 현재
+		int pageSize = 2; // 한페이지 게시글갯수 
+		int maxPage = 0; 
+		int chatroomCount=0;
+		
+		ChatroomDAO chatRoomDAO = new ChatroomDAO();
+		chatroomCount = chatRoomDAO.chatRoomCount(prd_num);
+		
+		if(request.getParameter("currentPage")!=null ) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		if(chatroomCount%pageSize==0) {
+			maxPage = chatroomCount /pageSize;
+		}else {
+			maxPage = (chatroomCount /pageSize)+1;
+		}
+		
+		
+		int startPage = ((currentPage -1)/5)*5+1;
+		int endPage = startPage + 5 -1;
+		if(endPage > maxPage) {
+			endPage = maxPage ; 
+		}
+		System.out.println("List전");
+		List<ChatroomDTO> chatRoomDTOs;
+		chatRoomDTOs = chatRoomDAO.chatRoomList(prd_num, currentPage,pageSize);
+		
+		request.setAttribute("chatRoomDTOs", chatRoomDTOs);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("maxPage", maxPage);
+
+		
+		
+		
+		
+		
 		
 		request.setAttribute("product", product);
 		request.setAttribute("price", price);
