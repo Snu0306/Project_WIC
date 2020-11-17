@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.service.MemberCheckIdAction;
+import kr.or.wic.service.MemberClosetPageAction;
 import kr.or.wic.service.MypageMemberEditAction;
 import kr.or.wic.service.MypageMemberEditPageAction;
 import kr.or.wic.service.MemberLogInAction;
@@ -36,7 +37,7 @@ public class MemberController extends HttpServlet {
     	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
     	String url_Command = requestURI.substring(contextPath.length());
-    	
+    	System.out.println(url_Command);
     	String viewpage="";
     	
     	Action action = null;
@@ -73,7 +74,7 @@ public class MemberController extends HttpServlet {
     	} else if (url_Command.equals("/myInfoEdit.my")) { //정보 수정하기 
     		action = new MypageMemberEditAction();	
     		forward = action.execute(request, response);
-    	} else if(url_Command.equals("myClosetEdit.my")) { //옷장소개 수정하기 ajax
+    	} else if(url_Command.equals("/myClosetEdit.my")) { //옷장소개 수정하기 ajax
     		action = new MyClosetEditAction();
     		forward = action.execute(request, response);
 		} else if (url_Command.equals("/myCart.my")) { //찜하기
@@ -81,6 +82,10 @@ public class MemberController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/Like.my")) { //좋아요 (사람)
     		
+    		
+    	} else if(url_Command.equals("/memberClosetPage.my")) {
+    		action = new MemberClosetPageAction();
+    		forward = action.execute(request, response);
     	}
     	
     	if(forward!=null) {
