@@ -17,10 +17,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/18cfffd9e0.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resource/style/loginRegister-style.css" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <title>Login and Register</title>
-
 </head>
-
 <body>
 	<header>
 		<%@ include file="/WEB-INF/views/common/Top.jsp" %>  

@@ -133,7 +133,7 @@
 					<div class="outer-grid">
 
 					
-						<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
+						<c:forEach var="i" begin="0" end="${fn:length(productList)}">
 
 							<div class="inner-grid">
 									<img src="upload/${productList[i].files.files_name}">

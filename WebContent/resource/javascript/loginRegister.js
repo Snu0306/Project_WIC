@@ -127,9 +127,9 @@ $(function(){
 								console.log(typeof(responsedata));	
 								console.log('>' + responsedata + '<');	
 								if(responsedata == "true"){
-									alert("사용가능한 이메일입니다.");
+									swal("사용가능한 이메일입니다.","","success");
 								}else if (responsedata == "false"){
-									alert("존재하는 이메일입니다.");
+									swal("존재하는 이메일입니다.","","error");
 								}
 							},
 							error:function(xhr){
