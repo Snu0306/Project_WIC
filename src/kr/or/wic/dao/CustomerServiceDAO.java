@@ -64,9 +64,10 @@ public class CustomerServiceDAO {
 				dto.setCs_notice(rs.getInt("CS_NOTICE"));	//공지사항여부
 				dto.setId(rs.getString("id"));	//작성자 아이디
 				dto.setName(rs.getString("name"));	//작성자 아이디
-				dto.setCs_delete(rs.getInt("CS_DELETE"));	//삭제여부
+				dto.setCs_delete(rs.getInt("cs_delete"));	//삭제여부
 				dto.setCs_secret(rs.getInt("CS_SECRET"));	//공개여부
 				csList.add(dto);
+				System.out.println(dto);
 			}
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -100,7 +101,6 @@ public class CustomerServiceDAO {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
@@ -316,7 +316,7 @@ public class CustomerServiceDAO {
 		int result = 0;
 		try {
 			conn = ds.getConnection();
-			String sql = "update customerservice set cs_delete=1 where cs_num=?";
+			String sql = "update customerservice set cs_delete=1, cs_notice=0 where cs_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs_num);
 			result = pstmt.executeUpdate();
