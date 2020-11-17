@@ -696,4 +696,57 @@ public class ProductDAO {
 		}
 		return id;
 	}
+	
+	//판매상태 확인
+	public int checkSaleState(int prd_num) {
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "select prd_state from product where prd_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, prd_num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result =  rs.getInt("prd_state");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		return result;
+	}
+	
+	// Update prd_state
+	public int updatePrdState(int prd_num, int prd_state) {
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "update product set prd_state=? where prd_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, prd_state);
+			pstmt.setInt(2, prd_num);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		return result;
+	}
 }

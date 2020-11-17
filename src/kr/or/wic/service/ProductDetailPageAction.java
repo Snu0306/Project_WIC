@@ -56,6 +56,9 @@ public class ProductDetailPageAction implements Action{
 		//좋아요 여부
 		String send_id = (String)request.getSession().getAttribute("id");
 		int checkLike = ldao.checkLike(send_id, get_id);
+	
+		//prd_state check
+		int saleState = pdao.checkSaleState(prd_num);
 		
 		int currentPage =1; // 현재
 		int pageSize = 2; // 한페이지 게시글갯수 
@@ -103,6 +106,7 @@ public class ProductDetailPageAction implements Action{
 		request.setAttribute("member", member);
 		request.setAttribute("getLike", getLike);
 		request.setAttribute("checkLike", checkLike);
+		request.setAttribute("saleState", saleState);
 		
 		//이동경로(viewpage)
 		viewpage = "ProductDetailPage.jsp";
