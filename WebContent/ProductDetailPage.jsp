@@ -400,19 +400,16 @@
       $("#comment-modal").click(function(){
         $("#myModal2").modal();
       });
-    });
-    </script>
+    
+ 
 
-<script>
  //채팅방 만들기 모달
-    $(document).ready(function(){
+    
       $("#modalBtn").click(function(){
         $("#myModal").modal();
       });
-    });
-</script>
-<script>
-$(document).ready(function() {
+   
+
 	if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {
 		$("#edit").hide();
 	}
