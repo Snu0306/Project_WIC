@@ -13,8 +13,10 @@ import kr.or.wic.dao.ClosetDAO;
 import kr.or.wic.dao.Like_RecordDAO;
 import kr.or.wic.dao.MemberDAO;
 import kr.or.wic.dao.ProductDAO;
+import kr.or.wic.dto.CartDTO;
 import kr.or.wic.dto.ClosetDTO;
 import kr.or.wic.dto.MemberDTO;
+import kr.or.wic.dto.PriceFormat;
 import kr.or.wic.dto.ProductDTO;
 
 public class MyClosetPageAction implements Action {
@@ -47,11 +49,19 @@ public class MyClosetPageAction implements Action {
 		//product
 		ProductDAO pdao = new ProductDAO();
 		List<ProductDTO> productList = pdao.getEachMemberAllProductAndFileList(id);
-
-
+		
+		//prd_price 원 처리
+		PriceFormat format = new PriceFormat();
+		for(ProductDTO product : productList) {
+			product.setPrd_price_won(format.makeCommaWon(product.getPrd_price()));
+		}
+		
+		//cartList
+		CartDAO cartdao = new CartDAO();
+		List<CartDTO> cartList = cartdao.getCartList(id);
+		
 		//likeList
 		List<Integer> likeList = new ArrayList<Integer>();
-		CartDAO cartdao = new CartDAO();
 		for(ProductDTO product : productList) {
 			likeList.add(cartdao.getLikeByPrdnum(product.getPrd_num()));
 		}
@@ -73,6 +83,9 @@ public class MyClosetPageAction implements Action {
 		request.setAttribute("likeList", likeList);
 		request.setAttribute("cartProductList", cartProductList);
 		request.setAttribute("cartLikeList", cartLikeList);
+		request.setAttribute("cartList",cartList);
+		System.out.println(id);
+		request.setAttribute("ownerId", id);
 
 		viewpage = "MyCloset.jsp";
 		forward.setPath(viewpage);

@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac5b2d3cc708a6fcb27e5b8880d6d626&libraries=services"></script>
+	<script src="resource/javascript/MyCloset.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<!-- jQuery Modal -->
@@ -33,11 +34,12 @@
 	<c:set var="closet" value="${requestScope.closet}"/>
 	<c:set var="productList" value="${requestScope.productList}"/>
 	<c:set var="cartProductList" value="${requestScope.cartProductList}"/>
+	<c:set var="cartList" value="${requestScope.cartList}"/>
 	<c:set var="fileList" value="${requestScope.fileList}"/>
 	<c:set var="checkLike" value="${requestScope.checkLike}"></c:set>
 	<c:set var="likeList" value="${requestScope.likeList}"></c:set>
 	<c:set var="id" value="${sessionScope.id}"></c:set>
-	<c:set var="ownerId" value="${requestScope.ownerId }"/>
+	<c:set var="ownerId" value="${requestScope.ownerId}"/>
 	
 	<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
 	<div id="wrapper" class="my-4">
@@ -122,30 +124,59 @@
 							<input id="tab2" type="radio" name="tabs">
 							<label class="mrAuto" for="tab2">찜목록</label>
 							<c:choose>
-							<c:when test="${id eq ownerId }">
-							<button class="btn" onclick="location.href='<%=request.getContextPath()%>/ProductUploadPage.Pd'">상품등록</button>
-							</c:when>
+								<c:when test="${id eq ownerId}">
+									<button class="btn" onclick="location.href='<%=request.getContextPath()%>/ProductUploadPage.Pd'">상품등록</button>
+								</c:when>
 							</c:choose>
 						</div>
 					</div>
 					
 					<!-- 판매 상품 목록 -->
 					<div class="outer-grid">
-
-					
-						<c:forEach var="i" begin="0" end="${fn:length(productList)}">
-
-							<div class="inner-grid">
-									<img src="upload/${productList[i].files.files_name}">
-								<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${productList[i].prd_num}">
-								<div class="overlay">
-									<span><i class="fas fa-heart"></i>&nbsp;${likeList[i]}</span>
-									&nbsp;&nbsp;&nbsp;
-									<span><i class="fas fa-comment"></i>&nbsp;5</span>
-								</div>
-								</a>
-							</div>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${fn:length(productList) != 0}">
+								<c:forEach var="i" begin="0" end="${fn:length(productList) - 1}">
+									<div class="inner-grid">
+										<img src="upload/${productList[i].files.files_name}">
+										<div class="overlay">
+											<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${productList[i].prd_num}">
+												<p id="hoverPrdTitle">${productList[i].prd_title}</p>
+											</a>
+											<div class="hoverPrdPrice">
+												<span>${productList[i].prd_price_won}</span>
+											</div>
+											
+											<!-- 찜하기 -->
+											<div class="hoverPrdHeart">
+												<c:choose>	
+													<c:when test="${empty cartList}">
+														<button class="far fa-heart like" value="${productList[i].prd_num}"></button>
+													</c:when>	
+												 	<c:otherwise>	
+														<c:forEach var="cart" items="${cartList}">
+															<c:if test="${productList[i].prd_num != cart.prd_num}">
+																<button class="far fa-heart like" value="${productList[i].prd_num}"></button>
+																<span>${likeList[i]}</span>
+																<span><i class="fas fa-comment"></i>&nbsp;5</span>
+															</c:if>
+															<c:if test="${productList[i].prd_num == cart.prd_num}">
+																<button class="fas fa-heart like" value="${productList[i].prd_num}"></button>
+																<span style="margin-right: 10px;">${likeList[i]}</span>
+																<span><i class="fas fa-comment"></i>&nbsp;5</span>
+															</c:if>
+														</c:forEach>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<h6>판매목록이 없습니다.</h6>
+							</c:otherwise>
+						</c:choose>
+>>>>>>> 64f834a7c2c40d047a30c682cf0ee8d2a42b6be3
 					</div>
 				</div>
 			</div>
@@ -257,9 +288,9 @@ $(document).ready(function(){
 	//판매목록, 찜목록
 	$("input[name=tabs]").change(function(e) {
 		if(e.target.id == 'tab1'){
-			$(".outer-grid").html('<c:forEach var="i" begin="0" end="${fn:length(productList)}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product[i].prd_num}"><img src="upload/${productList[i].files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;${likeList[i]}</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
+			$(".outer-grid").html('<c:choose><c:when test="${fn:length(productList) != 0}"><c:forEach var="i" begin="0" end="${fn:length(productList) - 1}"><div class="inner-grid"><img src="upload/${productList[i].files.files_name}"><div class="overlay"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${productList[i].prd_num}"><p id="hoverPrdTitle">${productList[i].prd_title}</p></a><div class="hoverPrdPrice"><span>${productList[i].prd_price_won}</span></div><div class="hoverPrdHeart"><c:choose><c:when test="${empty cartList}"><button class="far fa-heart like" value="${productList[i].prd_num}"></button></c:when><c:otherwise><c:forEach var="cart" items="${cartList}"><c:if test="${productList[i].prd_num != cart.prd_num}"><button class="far fa-heart like" value="${productList[i].prd_num}"></button><span>${likeList[i]}</span><span><i class="fas fa-comment"></i>&nbsp;5</span></c:if><c:if test="${productList[i].prd_num == cart.prd_num}"><button class="fas fa-heart like" value="${productList[i].prd_num}"></button><span style="margin-right: 10px;">${likeList[i]}</span><span><i class="fas fa-comment"></i>&nbsp;5</span></c:if></c:forEach></c:otherwise></c:choose></div></div></div></c:forEach></c:when><c:otherwise><h6>판매목록이 없습니다.</h6></c:otherwise></c:choose>');
 		} else {
-			$(".outer-grid").html('<c:forEach var="i" begin="0" end="${fn:length(cartProductList)}"><div class="inner-grid"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${cartProductList[i].prd_num}"><img src="upload/${cartProductList[i].files.files_name}"></a><div class="overlay"><span><i class="fas fa-heart"></i>&nbsp;${cartLikeList[i]}</span>&nbsp;&nbsp;&nbsp;<span><i class="fas fa-comment"></i>&nbsp;5</span></div></div></c:forEach>');
+			$(".outer-grid").html('<c:choose><c:when test="${fn:length(cartProductList) != 0}"><c:forEach var="i" begin="0" end="${fn:length(cartProductList) - 1}"><div class="inner-grid"><img src="upload/${cartProductList[i].files.files_name}"><div class="overlay"><a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${cartProductList[i].prd_num}"><p id="hoverPrdTitle">${cartProductList[i].prd_title}</p></a><div class="hoverPrdPrice"><span>${cartProductList[i].prd_price_won}</span></div><div class="hoverPrdHeart"><c:choose><c:when test="${empty cartList}"><button class="far fa-heart like" value="${cartProductList[i].prd_num}"></button></c:when><c:otherwise><c:forEach var="cart" items="${cartList}"><c:if test="${cartProductList[i].prd_num != cart.prd_num}"><button class="far fa-heart like" value="${cartProductList[i].prd_num}"></button><span>${cartLikeList[i]}</span><span><i class="fas fa-comment"></i>&nbsp;5</span></c:if><c:if test="${cartProductList[i].prd_num == cart.prd_num}"><button class="fas fa-heart like" value="${cartProductList[i].prd_num}"></button><span style="margin-right: 10px;">${cartLikeList[i]}</span><span><i class="fas fa-comment"></i>&nbsp;5</span></c:if></c:forEach></c:otherwise></c:choose></div></div></div></c:forEach></c:when><c:otherwise><h6>판매목록이 없습니다.</h6></c:otherwise></c:choose>');
 		}
 	});
 </script>
