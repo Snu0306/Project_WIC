@@ -26,19 +26,11 @@ public class MyClosetPageAction implements Action {
 		ActionForward forward = new ActionForward();
 		String id = (String)request.getSession().getAttribute("id");
 		
-		//해당 회원의 옷장 정보를 가지고 들어가야
-		//Left: 회원의 name, profile_pic, addr, Like_Record 테이블의 get_id 수 count, 옷장 테이블(closet_num과 일치하는)의 closet_title, closet_content
-		//Right: Product테이블의 해당 회원의 closet_num과 일치하는 product 객체(prd_num(링크 시 prd_num을 파라미터로), +필요한 정보만), files에서 prd_num의 첫번째 사진 파일의 file_name
-		
 		//회원(name, profile_pic, addr, +@) 정보
 		MemberDTO member = new MemberDTO();
 		MemberDAO mdao = new MemberDAO();
 		member = mdao.getMemberById(id); //해당 회원의 모든 정보
-		System.out.println(member);
 		
-		
-		
-
 		//Like 받은 수
 		Like_RecordDAO ldao = new Like_RecordDAO();
 		int getLike = ldao.getGetLikeById(id);
@@ -47,12 +39,12 @@ public class MyClosetPageAction implements Action {
 		String send_id = (String)request.getSession().getAttribute("id");
 		int checkLike = ldao.checkLike(send_id, id);
 		
-		//closet(closet_num, closet_title, closet_content) 정보
+		//closet
 		ClosetDTO closet = new ClosetDTO();
 		ClosetDAO cdao = new ClosetDAO();
 		closet = cdao.getClosetById(id);
 		
-		//product 객체 정보
+		//product
 		ProductDAO pdao = new ProductDAO();
 		List<ProductDTO> productList = pdao.getEachMemberAllProductAndFileList(id);
 
@@ -64,10 +56,14 @@ public class MyClosetPageAction implements Action {
 			likeList.add(cartdao.getLikeByPrdnum(product.getPrd_num()));
 		}
 
+		//cartProductList
 		List<ProductDTO> cartProductList = pdao.getEachMemberAllCartProductAndFileList(id);
 		
-		//file(file_name) 정보(모든 파일 리스트의 name 중 각 prd_num의 첫번째 파일)
-		
+		//cartLikeList
+		List<Integer> cartLikeList =  new ArrayList<Integer>();
+		for(ProductDTO product : cartProductList) {
+			cartLikeList.add(cartdao.getLikeByPrdnum(product.getPrd_num()));
+		}
 		
 		request.setAttribute("member", member);
 		request.setAttribute("getLike", getLike);
@@ -75,8 +71,8 @@ public class MyClosetPageAction implements Action {
 		request.setAttribute("productList", productList);
 		request.setAttribute("checkLike", checkLike);
 		request.setAttribute("likeList", likeList);
-		System.out.println(productList);
 		request.setAttribute("cartProductList", cartProductList);
+		request.setAttribute("cartLikeList", cartLikeList);
 
 		viewpage = "MyCloset.jsp";
 		forward.setPath(viewpage);
