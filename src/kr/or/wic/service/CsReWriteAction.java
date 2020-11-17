@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.dao.CustomerServiceDAO;
-import kr.or.wic.dto.CustomerServiceDTO;
 
 public class CsReWriteAction implements Action {
 
@@ -21,13 +20,11 @@ public class CsReWriteAction implements Action {
 		String content = request.getParameter("content");	//답글 내용
 		int cs_secret = Integer.parseInt(request.getParameter("cs_secret")); //비밀여부
 		
-		
 		int cs_num = Integer.parseInt(request.getParameter("cs_num"));		//원글의 num
 		int cs_refer = Integer.parseInt(request.getParameter("cs_refer"));	//원글의 refer
 		int cs_depth = Integer.parseInt(request.getParameter("cs_depth"));	//원글의 depth
 		int cs_step = Integer.parseInt(request.getParameter("cs_step"));	//원글의 step
 		
-		System.out.println(cs_num);
 		CustomerServiceDAO dao = new CustomerServiceDAO();
 		int result = dao.csRewrite(title, content, id, cs_num, cs_refer, cs_depth, cs_step, cs_secret);
 		
@@ -47,8 +44,8 @@ public class CsReWriteAction implements Action {
 		request.setAttribute("url", url);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("Redirect.jsp");
-		System.out.println("CsReWriteAction 실행 완료");
+		forward.setPath("WEB-INF/views/Redirect.jsp");
+		
 		return forward;
 	}
 }

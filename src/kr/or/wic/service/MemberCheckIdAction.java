@@ -20,12 +20,11 @@ public class MemberCheckIdAction implements Action{
 		
 		request.setAttribute("result", result);
 		
-		String viewpage = "MemberCheckId.jsp";
+		String viewpage = "WEB-INF/views/MemberCheckId.jsp";
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-	
 }

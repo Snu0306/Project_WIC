@@ -12,8 +12,6 @@ public class CsWritePageAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		
 		String sessionId="";
 		int currentPage = 1;
 		int pageSize = 10;
@@ -38,10 +36,8 @@ public class CsWritePageAction implements Action{
 			
 			System.out.println("CsWritePageAction");
 			
-			forward.setPath("CsWritePage.jsp");
-			System.out.println("csWritePageAction 실행 완료");
+			forward.setPath("WEB-INF/views/CsWritePage.jsp");
 		}else {
-			
 			String url = "/csPage.cs?currentPage="+currentPage+"&pageSize="+pageSize;
 			request.setAttribute("msg", "권한이 없습니다. 회원가입 후 이용해주세요.");
 			request.setAttribute("url", url);
@@ -49,5 +45,4 @@ public class CsWritePageAction implements Action{
 		}
 		return forward;
 	}
-
 }

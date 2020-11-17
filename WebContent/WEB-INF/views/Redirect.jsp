@@ -21,11 +21,8 @@
 		    	 location.href='<%=request.getContextPath()%><%=url%>';
 		     }
 		});
-		
 	}
-
 	</script>
-	
 <%	  
   }
 %>

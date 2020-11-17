@@ -34,7 +34,7 @@ public class ProductUploadPageAction implements Action{
 		request.setAttribute("addr", addr);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("ProductUploadPage.jsp");
+		forward.setPath("WEB-INF/views/ProductUploadPage.jsp");
 		
 		return forward;
 	}

@@ -29,7 +29,7 @@
 <body>
 
 	<!-- Header-->
-	<jsp:include page="WEB-INF/views/common/Top.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
 	<!-- /Header -->
 	
 	<section class="page-title">
@@ -174,7 +174,7 @@
 
 	</section>
 	<!-- bottom-->
-	<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 	<!-- /bottom -->
 </body>
 <script>

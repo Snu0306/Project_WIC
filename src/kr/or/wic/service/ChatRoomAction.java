@@ -17,7 +17,6 @@ public class ChatRoomAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-
 		ActionForward forward = new ActionForward();
 		
 		String SessionId = (String) request.getSession().getAttribute("id");	//SessionID
@@ -30,14 +29,12 @@ public class ChatRoomAction implements Action {
 		MessageDAO messageDao = new MessageDAO();
 		MessageDTO messageDto = messageDao.getMessageDTO(ch_num);
 		
-		
-		
 		if(!(SessionId == ch_id || SessionId == prd_id)) {
 			String msg = "접근 권한이 없습니다.";
 			String url = "#";		
 			request.setAttribute("msg", msg);
 			request.setAttribute("url", url);
-			forward.setPath("Redirect.jsp");
+			forward.setPath("WEB-INF/views/Redirect.jsp");
 			
 		}else {
 			ChatroomDAO dao = new ChatroomDAO();
@@ -47,10 +44,8 @@ public class ChatRoomAction implements Action {
 			request.setAttribute("cDto", cDto);
 			request.setAttribute("mDto", mDto);
 			request.setAttribute("messageDto", messageDto);
-			forward.setPath("CsPage.jsp");
+			forward.setPath("WEB-INF/views/CsPage.jsp");
 		}
-		System.out.println("CsPageAction실행 완료");
 		return forward;
 	}
-
 }

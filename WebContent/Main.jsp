@@ -207,15 +207,8 @@ p .{
 				</c:forEach>
 				
 			</div>
-
-
 		</div>
 	</div>
-
-
-
-
 	<%@ include file="/WEB-INF/views/common/Bottom.jsp"%>
-
 </body>
 </html>
