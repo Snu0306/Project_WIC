@@ -93,13 +93,7 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
 	
-	<!-- sweet alert -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 	<script type="text/javascript">
-		$(function(){
-			
-		});
 		$('.fa-times').on('click',function(){
 			location.href='<%=request.getContextPath()%>/myPage.my';
 		})
