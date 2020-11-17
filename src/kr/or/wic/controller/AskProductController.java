@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.service.AskAction;
-import kr.or.wic.service.AskPageAction;
+import kr.or.wic.service.AskWriteAction;
 
 
 
@@ -34,12 +33,9 @@ public class AskProductController extends HttpServlet {
     	Action action = null;
     	ActionForward forward = null;
     	
-   
-    	if(url_Command.equals("/page.askProduct")) {
-    		action = new AskPageAction();
-    		forward = action.execute(request, response);		
-    	}else if(url_Command.equals("/write.askProduct")) {
-    		action = new AskAction();
+   	
+    	if(url_Command.equals("/write.askProduct")) {
+    		action = new AskWriteAction();
     		forward = action.execute(request, response);		
     	}
     	

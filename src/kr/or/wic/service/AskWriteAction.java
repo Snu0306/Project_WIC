@@ -7,19 +7,23 @@ import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.dao.ChatroomDAO;
 
-public class AskAction implements Action {
+public class AskWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		String ch_title ="";
+		String ch_content ="";
+		if(request.getParameter("title") != null) {
+			ch_title = request.getParameter("title");
+		}
+		if(request.getParameter("content") != null) {
+			ch_content = request.getParameter("content");
+		}
 		String id = (String) request.getSession().getAttribute("id");	//SessionID
 		int prd_num = Integer.parseInt(request.getParameter("prd_num")); // prd_num
-		String ch_title = request.getParameter("title");
-		String ch_content = request.getParameter("content");
-		System.out.println(id);
-		System.out.println(prd_num);
-		System.out.println(ch_title);
-		System.out.println(ch_content);
+
+		
 		String msg;
 		String url;
 		
