@@ -19,11 +19,11 @@ public class CsEditAction implements Action {
 		int cs_num = Integer.parseInt(request.getParameter("cs_num"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		int cs_notice = 2;
+		int cs_notice = 0;
 		if(request.getParameter("cs_notice") != null) {
 			cs_notice =  Integer.parseInt(request.getParameter("cs_notice"));
 		}
-		int cs_secret = 2;
+		int cs_secret = 0;
 		if(request.getParameter("cs_secret") != null) {
 			cs_secret =  Integer.parseInt(request.getParameter("cs_secret"));
 		}

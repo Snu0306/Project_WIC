@@ -71,13 +71,6 @@
 				<div class="col-md-8">
 				</div>
 				<div class="col-md-2">
-					<form>
-						<select name="showOption" class="form-control" onchange="#ID 또는 NAME">
-								<option selected>전체 글보기</option>
-								<option>공지사항</option>
-								<option>Q&A</option>
-						</select>
-					</form>
 				</div>
 			</div>
 			<br>
@@ -96,26 +89,39 @@
 							<tr class="table-tr">
 								<td class="py-auto text-center">${csList.cs_num}</td>
 								<td> 
-									<c:forEach var="i" begin="1" end="${csList.cs_depth}" step="1">
-                        				&nbsp;&nbsp;&nbsp;
-                    		 		</c:forEach>  
-                    				<c:if test="${csList.cs_depth>0}">
-										<img src='resource/image/re.gif'/>
-									</c:if>
-									<c:choose>
-										<c:when test="${csList.cs_step == 0}">	                            	
-		                            		<a href="<%= request.getContextPath()%>/csDetailPage.cs?cs_num=${csList.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}&cs_secret=${csList.cs_secret}"><b>${csList.cs_title}<b/></a>
-		                        		</c:when>
-										<c:otherwise>
-		                            		<a href="<%= request.getContextPath()%>/csDetailPage.cs?cs_num=${csList.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}">${csList.cs_title}</a>
-		                               </c:otherwise>
-										</c:choose>
-												<c:if test="${csList.cs_notice == 1}">
-		                        			<img src='resource/image/jong2.png'/>
-		                        		</c:if>
-		                        		<c:if test="${csList.cs_secret == 1}">
-		                        			<img src='resource/image/lock.png'/>
-		                        		</c:if>
+									
+										<c:if test="${csList.cs_delete ==1 }">
+											<c:forEach var="i" begin="1" end="${csList.cs_depth}" step="1">
+		                        				&nbsp;&nbsp;&nbsp;
+		                    		 		</c:forEach>  
+		                    				<c:if test="${csList.cs_depth>0}">
+												<img src='resource/image/re.gif'/>
+											</c:if>
+											<i style="color:gray">삭제된 게시물</i>
+										</c:if>
+										
+										<c:if test="${csList.cs_delete != 1 }">
+											<c:forEach var="i" begin="1" end="${csList.cs_depth}" step="1">
+		                        				&nbsp;&nbsp;&nbsp;
+		                    	 			</c:forEach>  
+		                    				<c:if test="${csList.cs_depth>0}">
+												<img src='resource/image/re.gif'/>
+											</c:if>
+											<c:choose>
+												<c:when test="${csList.cs_step == 0}">	                     
+			                            			<a href="<%= request.getContextPath()%>/csDetailPage.cs?cs_num=${csList.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}&cs_secret=${csList.cs_secret}"><b>${csList.cs_title}<b/></a>
+			                        			</c:when>
+												<c:otherwise>
+				                           			<a href="<%= request.getContextPath()%>/csDetailPage.cs?cs_num=${csList.cs_num}&currentPage=${currentPage}&pageSize=${pageSize}">${csList.cs_title}</a>
+				                           	  	</c:otherwise>
+											</c:choose>
+											<c:if test="${csList.cs_notice == 1}">
+				                       			<img src='resource/image/jong2.png'/>
+				                       		</c:if>
+				                       		<c:if test="${csList.cs_secret == 1}">
+				                       			<img src='resource/image/lock.png'/>
+				                       		</c:if>
+				                       	</c:if>
 		                        		
 									</td>
 								<td class="text-center">${csList.name}</td>
