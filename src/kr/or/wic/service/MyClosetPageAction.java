@@ -87,8 +87,9 @@ public class MyClosetPageAction implements Action {
 		System.out.println(id);
 		request.setAttribute("ownerId", id);
 
-		viewpage = "MyCloset.jsp";
+		viewpage = "WEB-INF/views/MyCloset.jsp";
 		forward.setPath(viewpage);
+		
 		return forward;
 	}
 }

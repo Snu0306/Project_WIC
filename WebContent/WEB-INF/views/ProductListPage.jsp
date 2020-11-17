@@ -113,7 +113,7 @@
 		</div>
 	
 	</div>
-	<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 	
 
 </body>

@@ -23,7 +23,6 @@ public class MemberEditPageAction implements Action {
 		String viewpage = "";
 		ActionForward forward = new ActionForward();
 		String adminId = (String)request.getSession().getAttribute("id");
-		//System.out.println("adminId:"+adminId);
 		if(adminId == null || !adminId.equals("admin@admin.com")) {
 			viewpage = "Main.jsp";
 			forward.setPath(viewpage);
@@ -39,10 +38,9 @@ public class MemberEditPageAction implements Action {
 		request.setAttribute("memberDto", memberDto);
 		
 		//이동경로(viewpage)
-		viewpage = "/MemberInfoEdit.jsp";
+		viewpage = "WEB-INF/views//MemberInfoEdit.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-	
 }

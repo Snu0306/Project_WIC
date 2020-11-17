@@ -37,23 +37,19 @@
 					<div class="container">
 						<div class="row ml-4">
 							<h3 class="my-0">상품 이름 :</h3>
-							&nbsp;<input class="col-sm-7" type="text" id="productName"
-								name="productName">
+							&nbsp;<input class="col-sm-7" type="text" id="productName" name="productName">
 						</div>
 						<br>
 						<div class="row ml-4">
 							<h3 class="my-0">지역 :</h3>
-							&nbsp;<input class="col-sm-8" type="text" id="location"
-								name="location" value="${addr }" readonly>
+							&nbsp;<input class="col-sm-8" type="text" id="location" name="location" value="${addr }" readonly>
 						</div>
 						<br>
 						<div class="row ml-4">
 							<h3 class="my-0">가격 :</h3>
-							&nbsp; <input class="col-sm-8" type="text" id="productPrice"
-								name="productPrice">
+							&nbsp; <input class="col-sm-8" type="text" id="productPrice" name="productPrice">
 						</div>
 						<br>
-
 					</div>
 				</div>
 				<div class="col-md-12 ">
@@ -83,7 +79,7 @@
 		</form>
 		<input type="file" id="fileProfile" name="fileProfile" accept="image/*" multiple >
 	</div>
-	<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 
 </body>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -96,6 +92,7 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+	
 	<script type="text/javascript">
 		$('.fa-times').on('click',function(){
 			location.href='<%=request.getContextPath()%>/myPage.my';

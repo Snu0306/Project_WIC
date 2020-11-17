@@ -6,13 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.dao.CustomerServiceDAO;
-import kr.or.wic.dto.CustomerServiceDTO;
 
 public class CsWriteAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		
 		int notice = 0;
 		int cs_secret = 0;
 		if(request.getParameter("notice") != null) {
@@ -24,7 +22,6 @@ public class CsWriteAction implements Action{
 		String id = request.getParameter("id");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
 				
 		CustomerServiceDAO dao = new CustomerServiceDAO();
 		dao.writeCs(id, title, content, notice, cs_secret);
@@ -36,10 +33,8 @@ public class CsWriteAction implements Action{
 		request.setAttribute("url", url);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("Redirect.jsp");
-		System.out.println("CsWriteAction실행 완료");
+		forward.setPath("WEB-INF/views/Redirect.jsp");
 		
 		return forward;
 	}
-
 }

@@ -29,7 +29,7 @@ public class CsEditPageAction implements Action {
 		request.setAttribute("sessionId", sessionId);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("CsEditPage.jsp");
+		forward.setPath("WEB-INF/views/CsEditPage.jsp");
 		System.out.println("CsEditPageAction 실행 완료");
 		return forward;
 	}

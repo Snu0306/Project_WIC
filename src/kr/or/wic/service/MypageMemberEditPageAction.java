@@ -5,10 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.dto.MemberDTO;
-import kr.or.wic.dto.ProductDTO;
 import kr.or.wic.dao.MemberDAO;
-import kr.or.wic.dao.ProductDAO;
+import kr.or.wic.dto.MemberDTO;
 
 public class MypageMemberEditPageAction implements Action{
 
@@ -20,24 +18,14 @@ public class MypageMemberEditPageAction implements Action{
 		ActionForward forward = new ActionForward();
 		String id = (String)request.getSession().getAttribute("id");
 		
-		
-		
-		
 		MemberDAO memberdao = new MemberDAO();
 		MemberDTO member = memberdao.getMemberById(id);
 		
-		/*
-		System.out.println(member);
-		System.out.println(id);
-		*/
-		
 		request.setAttribute("member", member);
 		
-		viewpage = "myInfoEditPage.jsp";
+		viewpage = "WEB-INF/views/myInfoEditPage.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
-		
 	}
-
 }

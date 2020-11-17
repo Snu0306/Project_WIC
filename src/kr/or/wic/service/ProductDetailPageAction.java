@@ -1,6 +1,5 @@
 package kr.or.wic.service;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +55,9 @@ public class ProductDetailPageAction implements Action{
 		//좋아요 여부
 		String send_id = (String)request.getSession().getAttribute("id");
 		int checkLike = ldao.checkLike(send_id, get_id);
+	
+		//prd_state check
+		int saleState = pdao.checkSaleState(prd_num);
 		
 		int currentPage =1; // 현재
 		int pageSize = 2; // 한페이지 게시글갯수 
@@ -77,10 +79,11 @@ public class ProductDetailPageAction implements Action{
 		
 		int startPage = ((currentPage -1)/5)*5+1;
 		int endPage = startPage + 5 -1;
+		
 		if(endPage > maxPage) {
 			endPage = maxPage ; 
 		}
-		System.out.println("List전");
+		
 		List<ChatroomDTO> chatRoomDTOs;
 		chatRoomDTOs = chatRoomDAO.chatRoomList(prd_num, currentPage,pageSize);
 		
@@ -91,30 +94,18 @@ public class ProductDetailPageAction implements Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("maxPage", maxPage);
 
-		
-		
-		
-		
-		
-		
 		request.setAttribute("product", product);
 		request.setAttribute("price", price);
 		request.setAttribute("fileList", fileList);
 		request.setAttribute("member", member);
 		request.setAttribute("getLike", getLike);
 		request.setAttribute("checkLike", checkLike);
+		request.setAttribute("saleState", saleState);
 		
 		//이동경로(viewpage)
-		viewpage = "ProductDetailPage.jsp";
+		viewpage = "WEB-INF/views/ProductDetailPage.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-	
-	private String makeComma(int num) {
-		DecimalFormat formatter = new DecimalFormat("###,###");
-		String result = formatter.format(num) + "원";
-		return result;
-	}
-
 }

@@ -19,7 +19,7 @@ public class AskPageAction implements Action {
 		request.setAttribute("id", id);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("askProduct.jsp");
+		forward.setPath("WEB-INF/views/askProduct.jsp");
 		System.out.println("askPageAction 실행 완료");
 		return forward;
 	}

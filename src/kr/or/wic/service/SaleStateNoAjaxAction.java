@@ -5,18 +5,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.dao.MemberDAO;
+import kr.or.wic.dao.ProductDAO;
 
-public class MyClosetEditAction implements Action{
+public class SaleStateNoAjaxAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		String id = (String)request.getSession().getAttribute("id");
-		String content = request.getParameter("contentedit");
+		int prd_num  = Integer.parseInt(request.getParameter("prd_num"));
 		
-		MemberDAO dao = new MemberDAO();
-		dao.setClosetInfo(id, content);
+		ProductDAO pdao = new ProductDAO();
+		pdao.updatePrdState(prd_num, 1);
 		
 		return null;
 	}
+
 }

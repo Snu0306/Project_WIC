@@ -24,7 +24,6 @@ public class MemberManagementAction implements Action{
 		String viewpage = "";
 		ActionForward forward = new ActionForward();
 		String id = (String)request.getSession().getAttribute("id");
-		System.out.println("get session id");
 		if(id == null || !id.equals("admin@admin.com")) {
 			viewpage = "Main.jsp";
 			forward.setPath(viewpage);
@@ -32,22 +31,19 @@ public class MemberManagementAction implements Action{
 		}
 		
 		//DAO, DTO 처리
-	
 		MemberDAO memberDao = new MemberDAO();
 		try {
 			List<MemberDTO> memberList = memberDao.getMemberList();
 			request.setAttribute("memberList", memberList);
-			
 		} catch (Exception e) {
 			System.out.println("get MemberList dao error");
 			e.getMessage();
 		}
 				
 		//이동경로(viewpage)
-		viewpage = "MemberManagementMain.jsp";
+		viewpage = "WEB-INF/views/MemberManagementMain.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-	
 }

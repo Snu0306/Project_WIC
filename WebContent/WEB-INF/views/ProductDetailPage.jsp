@@ -5,77 +5,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product Detail</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Product Detail</title>
+	
+	<!-- Bootstrap cdn -->
+	<link rel="stylesheet" href="resource/style/productDetail.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap cdn -->
-<link rel="stylesheet" href="resource/style/productDetail.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
-
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<style>
-.modal-header, h4, .close {
-	background-color: #ddc5ee;
-	color: white !important;
-	text-align: center;
-	font-size: 30px;
-}
-
-.modal-footer {
-	background-color: #f9f9f9;
-}
-</style>
+	<style>
+	.modal-header, h4, .close {
+		background-color: #ddc5ee;
+		color: white !important;
+		text-align: center;
+		font-size: 30px;
+	}
+	
+	.modal-footer {
+		background-color: #f9f9f9;
+	}
+	</style>
 </head>
 
 <body>
-	<!-- Top -->
-	<jsp:include page="WEB-INF/views/common/Top.jsp"></jsp:include>
+<!-- Top -->
+<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
 
+<!-- 변수선언 -->
+<c:set var="product" value="${requestScope.product}"></c:set>
+<c:set var="price" value="${requestScope.price}"></c:set>
+<c:set var="fileList" value="${requestScope.fileList}"></c:set>
+<c:set var="member" value="${requestScope.member}"></c:set>
+<c:set var="getLike" value="${requestScope.getLike}"></c:set>
+<c:set var="checkLike" value="${requestScope.checkLike}"></c:set>
+<c:set var="id" value="${sessionScope.id}"></c:set>
+<c:set var="saleState" value="${requestScope.saleState}"></c:set>
 
-	<!-- 변수선언 -->
-	<c:set var="product" value="${requestScope.product}"></c:set>
-	<c:set var="price" value="${requestScope.price}"></c:set>
-	<c:set var="fileList" value="${requestScope.fileList}"></c:set>
-	<c:set var="member" value="${requestScope.member}"></c:set>
-	<c:set var="getLike" value="${requestScope.getLike}"></c:set>
-	<c:set var="checkLike" value="${requestScope.checkLike}"></c:set>
-	<c:set var="id" value="${sessionScope.id}"></c:set>
-
-	<div class="mb-5"></div>
+<div class="mb-5"></div>
 	<div class="container">
 		<div class="row">
 			<!-- Left -->
 			<div class="col-md-6 mb-5 leftDiv">
-
+				
 				<!-- carousel slide -->
 				<div id="imgCarousel" class="carousel slide" data-interval="false">
-
+					
 					<!-- data-target -->
 					<c:choose>
 						<c:when test="${fn:length(fileList) <= 1}"></c:when>
 						<c:otherwise>
 							<ol class="carousel-indicators">
-								<li data-target="imgCarousel" data-slide-to="0" class="active"></li>
-								<c:forEach var="i" begin="1" end="${fn:length(fileList) - 1}">
-									<li data-target="imgCarousel" data-slide-to="${i}"></li>
-								</c:forEach>
+							    <li data-target="imgCarousel" data-slide-to="0" class="active"></li>
+							    <c:forEach var="i" begin="1" end="${fn:length(fileList) - 1}">
+			    				    <li data-target="imgCarousel" data-slide-to="${i}"></li>
+							    </c:forEach>
 							</ol>
 						</c:otherwise>
 					</c:choose>
-
+					
 					<!-- carousel-inner 이미지 -->
 					<div class="carousel-inner">
 						<c:choose>
@@ -108,35 +102,32 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-
+						
 						<!-- 이전/다음페이지 아이콘(이미지가 없거나 1개이면 삭제) -->
 						<c:choose>
 							<c:when test="${fn:length(fileList) <= 1}"></c:when>
 							<c:otherwise>
-								<a class="carousel-control-prev" href="#imgCarousel"
-									role="button" data-slide="prev"> <span
-									class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-									class="sr-only">Previous</span>
+								<a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
 								</a>
-								<a class="carousel-control-next" href="#imgCarousel"
-									role="button" data-slide="next"> <span
-									class="carousel-control-next-icon" aria-hidden="true"></span> <span
-									class="sr-only">Next</span>
+								<a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
 								</a>
 							</c:otherwise>
 						</c:choose>
 					</div>
-				</div>
+				</div>	
 			</div>
-
+			
 			<!-- Right -->
 			<!-- member(profile_pic, name, addr), like_record(count수), product(prd_num, prd_title, prd_price, prd_content, files) -->
 			<div class="col-md-6 rightDiv">
 				<div class="mb-4">
 					<div class="d-flex justify-content-between">
 						<!-- 이미지 클릭 시 해당 회원 옷장으로 이동 -->
-						<a class="toCloset"
-							href="<%=request.getContextPath()%>/memberClosetPage.my?prd_num=${product.prd_num}">
+						<a class="toCloset" href="<%=request.getContextPath()%>/memberClosetPage.my?prd_num=${product.prd_num}">
 							<img id="userPic" src="upload/${member.profile_pic}">
 						</a>
 						<div class="mr-auto">
@@ -151,18 +142,31 @@
 							</c:choose>
 							<span id="cnt">${getLike}</span>
 						</div>
-						<button id="edit" class="btn btn-primary"
-							onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+						<button id="edit" class="btn btn-primary edit" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+
+						<!-- 판매 상태 변경 -->
+						<c:choose>
+							<c:when test="${saleState eq 0}">
+								<button id="saleState" class="btn btn-success" aria-hidden="true">판매중</button>
+							</c:when>
+							<c:otherwise>
+								<button id="saleState" class="btn btn-danger" aria-hidden="true">판매완료</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div class="mb-3">
 					<h3 id="title">${product.prd_title}</h3>
 				</div>
 				<div class="mb-2">
-					<h5 id="price">${price}<span id="location">${member.addr}</span>
-					</h5>
+					<h5 id="price">${price}<span id="location">${member.addr}</span></h5>
 				</div>
-				<div class="mb-4 description">${product.prd_content}</div>
+				<div class="mb-4 description">
+					${product.prd_content}
+				</div>
+				
+				
+				<!-- 문의사항 게시판 -->
 				<div class="mb-2 d-flex justify-content-between">
 					<span class="prdReply">채팅방</span> <a id="modalBtn"
 						href="<%= request.getContextPath()%>/Page.askProduct?prd_num=${product.prd_num}"
@@ -391,7 +395,7 @@
 	<!-- Modal for ask button ends  -->
 
 	<div class="mb-5"></div>
-	<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 </body>
 
 <script>
@@ -412,7 +416,43 @@
 
 	if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {
 		$("#edit").hide();
-	}
+	} else {
+		$('#saleState').click(function(e) {
+			if($(this).hasClass('btn-success')){
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/notToSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#saleState").attr('class', 'btn btn-danger');
+							$("#saleState").html('판매완료');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			} else {
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/toSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#saleState").attr('class', 'btn btn-success');
+							$("#saleState").html('판매중');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			}
+		});
+	};
 	
 	$("#heart").click(function(e) {
 		if('${id}' != '') {	
