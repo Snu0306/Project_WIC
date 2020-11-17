@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="resource/javascript/bootstrap.bundle.js"></script>
 	<link rel="stylesheet" href="resource/style/myPage-style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac5b2d3cc708a6fcb27e5b8880d6d626&libraries=services"></script>
 	
@@ -132,19 +132,18 @@
 					<!-- 판매 상품 목록 -->
 					<div class="outer-grid">
 					
-						<c:forEach var="i" begin="0" end="${fn:length(productList)}">
+						<c:forEach var="i" begin="0" end="${fn:length(productList)-1}">
 							<div class="inner-grid">
-								<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${product[i].prd_num}">
 									<img src="upload/${productList[i].files.files_name}">
-								</a>
+								<a href="<%=request.getContextPath()%>/ProductDetailPage.Pd?prd_num=${productList[i].prd_num}">
 								<div class="overlay">
 									<span><i class="fas fa-heart"></i>&nbsp;${likeList[i]}</span>
 									&nbsp;&nbsp;&nbsp;
 									<span><i class="fas fa-comment"></i>&nbsp;5</span>
 								</div>
+								</a>
 							</div>
 						</c:forEach>
-						
 					</div>
 				</div>
 			</div>
