@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
+import kr.or.wic.service.CsDeleteAction;
 import kr.or.wic.service.CsDetailPageAction;
 import kr.or.wic.service.CsEditAction;
 import kr.or.wic.service.CsEditPageAction;
@@ -66,6 +67,9 @@ public class CsController extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/csReWrite.cs")) { //글 수정하기
     		action = new CsReWriteAction();
+    		forward = action.execute(request, response);
+    	} else if (url_Command.equals("/csDelete.cs")) { //글 수정하기
+    		action = new CsDeleteAction();
     		forward = action.execute(request, response);
     	} 
     	

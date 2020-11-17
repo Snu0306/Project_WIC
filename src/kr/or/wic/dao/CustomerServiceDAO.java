@@ -64,9 +64,10 @@ public class CustomerServiceDAO {
 				dto.setCs_notice(rs.getInt("CS_NOTICE"));	//공지사항여부
 				dto.setId(rs.getString("id"));	//작성자 아이디
 				dto.setName(rs.getString("name"));	//작성자 아이디
-				dto.setCs_delete(rs.getInt("CS_DELETE"));	//삭제여부
+				dto.setCs_delete(rs.getInt("cs_delete"));	//삭제여부
 				dto.setCs_secret(rs.getInt("CS_SECRET"));	//공개여부
 				csList.add(dto);
+				System.out.println(dto);
 			}
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -100,7 +101,6 @@ public class CustomerServiceDAO {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
@@ -151,7 +151,9 @@ public class CustomerServiceDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs_num);
 			rs = pstmt.executeQuery();
-			
+//			while(rs.next()) {
+//				
+//			}
 		} catch (SQLException e) {
 			System.out.println("csDetailCounting 예외 발생");
 			e.printStackTrace();
@@ -216,38 +218,34 @@ public class CustomerServiceDAO {
 		try {
 			conn = ds.getConnection();
 			
-			if(cs_notice == 2) {
+//			if(cs_notice == 2) {
 				String sql = "update CUSTOMERSERVICE\r\n" + 
-						"set cs_title=? , cs_content=? ,cs_secret=?" + 
+						"set cs_title=? , cs_content=? ,cs_secret=?,cs_notice=?" + 
 						"where cs_num=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
 				pstmt.setInt(3, cs_secret);				
+				pstmt.setInt(4, cs_notice);
+				pstmt.setInt(5, cs_num);
+//			}else {
+//				String sql = "update CUSTOMERSERVICE\r\n" + 
+//						"set cs_title=? , cs_content=? ,cs_notice=?" + 
+//						"where cs_num=?";
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, title);
+//				pstmt.setString(2, content);
 //				pstmt.setInt(3, cs_notice);
-				pstmt.setInt(4, cs_num);
-			}else {
-				String sql = "update CUSTOMERSERVICE\r\n" + 
-						"set cs_title=? , cs_content=? ,cs_notice=?" + 
-						"where cs_num=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, title);
-				pstmt.setString(2, content);
-				pstmt.setInt(3, cs_notice);
-				pstmt.setInt(4, cs_num);
-//				pstmt.setInt(5, cs_secret);								
-			}
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				System.out.println("csEdit() 성공!!");
-				result = rs.getInt(1);
-			}
+//				pstmt.setInt(4, cs_num);
+//			}
+			result = pstmt.executeUpdate();
+			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("csEdit() Error");
 		} finally {
 			try {
-				rs.close();
+//				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
@@ -257,25 +255,36 @@ public class CustomerServiceDAO {
 		return result;
 	}
 	
-	@SuppressWarnings("finally")
-	public boolean csRewrite(String title, String content, String id, int cs_num, int cs_refer, int cs_depth, int cs_step, int cs_secret) {
-		boolean result = false;
+	public int csRewrite(String title, String content, String id, int cs_num, int cs_refer, int cs_depth, int cs_step, int cs_secret) {
+		int result = 0;
+		String sql ="";
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);
-			String sql = "update CUSTOMERSERVICE\r\n" + 
+			sql = "update CUSTOMERSERVICE\r\n" + 
 					"    set cs_depth= ?\r\n" + 
 					"    where cs_refer=? and cs_depth>?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs_depth+1);
 			pstmt.setInt(2, cs_refer);
 			pstmt.setInt(3, cs_depth);
-			rs = pstmt.executeQuery();
-//			if(rs.next()) {
-//			}
-			System.out.println("1차 성공");
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("csRewrite() 오류");
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}  finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			conn = ds.getConnection();
 			sql = "insert into customerservice(CS_NUM, CS_REFER, CS_DEPTH, CS_STEP, CS_NOTICE, ID, CS_TITLE, CS_CONTENT, CS_COUNT, CS_DATE, CS_SECRET) \r\n" + 
-					"    values(CUSTOMERSERVICE_CS_NUM.nextval, ?, ?, ?, 0, ?, ?, ?, 0, sysdate)"; 
+					"    values(CUSTOMERSERVICE_CS_NUM.nextval, ?, ?, ?, 0, ?, ?, ?, 0, sysdate,?)"; 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs_refer);
 			pstmt.setInt(2, cs_depth+1);
@@ -284,31 +293,50 @@ public class CustomerServiceDAO {
 			pstmt.setString(5, title);
 			pstmt.setString(6,content);
 			pstmt.setInt(7, cs_secret);
-			System.out.println("2차 실행 중");
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				result = true;
+			result += pstmt.executeUpdate();	
+			if(result>1) {
 				System.out.println("2차 성공");
-				conn.commit();
 			}
 		} catch (SQLException e) {
 			System.out.println("csRewrite() 오류");
-			conn.rollback();
-			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return result;
 		}
-
+		return result;
 	}
-
+	
+	public int deleteCs(int cs_num) {
+		System.out.println("deleteCs 진입");
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = "update customerservice set cs_delete=1, cs_notice=0 where cs_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cs_num);
+			result = pstmt.executeUpdate();
+			if(result>0) {
+				System.out.println("deleteCs 성공!");
+			}
+		} catch (SQLException e) {
+			System.out.println("deleteCs 성공!");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
+		}
+		return result;
+	}
 
 }
 

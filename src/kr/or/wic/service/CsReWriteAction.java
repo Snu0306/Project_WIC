@@ -12,14 +12,15 @@ public class CsReWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		
 		String id = request.getParameter("id"); 			//작성자의 아이디
 		String title = request.getParameter("title");		//답글의 제목
 		String content = request.getParameter("content");	//답글 내용
 		int cs_secret = Integer.parseInt(request.getParameter("cs_secret")); //비밀여부
 		
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		
 		int cs_num = Integer.parseInt(request.getParameter("cs_num"));		//원글의 num
 		int cs_refer = Integer.parseInt(request.getParameter("cs_refer"));	//원글의 refer
@@ -28,12 +29,12 @@ public class CsReWriteAction implements Action {
 		
 		System.out.println(cs_num);
 		CustomerServiceDAO dao = new CustomerServiceDAO();
-		boolean result = dao.csRewrite(title, content, id, cs_num, cs_refer, cs_depth, cs_step, cs_secret);
+		int result = dao.csRewrite(title, content, id, cs_num, cs_refer, cs_depth, cs_step, cs_secret);
 		
 		String msg ="";
 		String url ="";
 		
-		if(result) {
+		if(result>0) {
 			System.out.println("result true");
 			msg = "답글 작성 완료";
 			url = "/csPage.cs?currentPage="+currentPage+"&pageSize="+pageSize;
