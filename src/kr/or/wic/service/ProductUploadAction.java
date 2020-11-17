@@ -34,8 +34,6 @@ public class ProductUploadAction implements Action{
 		ProductDAO pdao = new ProductDAO();
 		pdao.insertProduct(pdto);
 		
-		
-		
 		//file 정보에 prd_num 입력
 		int prd_num = new ProductDAO().getPrd_seqCurrval();
 		FilesDAO fdao = new FilesDAO();
@@ -48,8 +46,8 @@ public class ProductUploadAction implements Action{
 		request.setAttribute("url", url);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("Redirect.jsp");
-		System.out.println("ProductWrite 실행 완료");
+		forward.setPath("WEB-INF/views/Redirect.jsp");
+		
 		return forward;
 	}
 

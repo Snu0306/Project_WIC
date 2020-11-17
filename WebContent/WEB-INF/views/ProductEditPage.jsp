@@ -85,7 +85,7 @@
 </div>
 
 <!-- Bottom -->
-<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 
 </body>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">

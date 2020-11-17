@@ -1,6 +1,5 @@
 package kr.or.wic.service;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,10 +79,11 @@ public class ProductDetailPageAction implements Action{
 		
 		int startPage = ((currentPage -1)/5)*5+1;
 		int endPage = startPage + 5 -1;
+		
 		if(endPage > maxPage) {
 			endPage = maxPage ; 
 		}
-		System.out.println("List전");
+		
 		List<ChatroomDTO> chatRoomDTOs;
 		chatRoomDTOs = chatRoomDAO.chatRoomList(prd_num, currentPage,pageSize);
 		
@@ -94,12 +94,6 @@ public class ProductDetailPageAction implements Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("maxPage", maxPage);
 
-		
-		
-		
-		
-		
-		
 		request.setAttribute("product", product);
 		request.setAttribute("price", price);
 		request.setAttribute("fileList", fileList);
@@ -109,16 +103,9 @@ public class ProductDetailPageAction implements Action{
 		request.setAttribute("saleState", saleState);
 		
 		//이동경로(viewpage)
-		viewpage = "ProductDetailPage.jsp";
+		viewpage = "WEB-INF/views/ProductDetailPage.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-	
-	private String makeComma(int num) {
-		DecimalFormat formatter = new DecimalFormat("###,###");
-		String result = formatter.format(num) + "원";
-		return result;
-	}
-
 }

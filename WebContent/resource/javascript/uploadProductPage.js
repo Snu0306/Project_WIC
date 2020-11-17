@@ -11,11 +11,9 @@ $(function(){
     	theme: 'monokai'
   		},
 		callbacks:{
-			onImageUpload: function(files, editor,weleditable){
+			onImageUpload: function(files, editor, weleditable){
 					thumbnail(files);
 					uploadFile(files);
-					
-				
 			}
 		}
 	});

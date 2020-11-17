@@ -12,23 +12,23 @@ public class CsEditAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("ACTION 진입");
-		
+		ActionForward forward = new ActionForward();
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		int cs_num = Integer.parseInt(request.getParameter("cs_num"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
 		int cs_notice = 0;
+		
 		if(request.getParameter("cs_notice") != null) {
 			cs_notice =  Integer.parseInt(request.getParameter("cs_notice"));
 		}
+		
 		int cs_secret = 0;
 		if(request.getParameter("cs_secret") != null) {
 			cs_secret =  Integer.parseInt(request.getParameter("cs_secret"));
 		}
 		
-		System.out.println("dao 이전");
 		CustomerServiceDAO dao = new CustomerServiceDAO();
 		int result = dao.csEdit(cs_num, title, content, cs_notice, cs_secret);
 		if(result != 0 ) {
@@ -42,9 +42,7 @@ public class CsEditAction implements Action {
 		request.setAttribute("msg", msg);
 		request.setAttribute("url", url);
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("Redirect.jsp");
-		System.out.println("CsDetailPageAction 실행 완료");
+		forward.setPath("WEB-INF/views/Redirect.jsp");
 		return forward;
 	}
 }

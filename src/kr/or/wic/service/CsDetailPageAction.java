@@ -13,34 +13,31 @@ public class CsDetailPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-
+		ActionForward forward = new ActionForward();
 		String sessionId = "";
 		if (request.getSession().getAttribute("id") != null) {
 			sessionId = (String) request.getSession().getAttribute("id");
-			System.out.println("sessionId : " + sessionId);
 		}
 		int cs_num = Integer.parseInt(request.getParameter("cs_num")); // 글 번호
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		ActionForward forward = new ActionForward();
 
 		CustomerServiceDAO dao = new CustomerServiceDAO();
 		CustomerServiceDTO dto = dao.csDetailPage(cs_num);
 
-		System.out.println(dto);
 		if (dto.getCs_secret() == 1) {
 			System.out.println("여기?");
 			if (! (sessionId.equals("admin@admin.com") || sessionId.equals(dto.getId()))) {
 				request.setAttribute("msg", "비밀글입니다.");
 				request.setAttribute("url", "/csPage.cs?currentPage=" + currentPage + "&pageSize=" + pageSize);
-				forward.setPath("Redirect.jsp");
+				forward.setPath("WEB-INF/views/Redirect.jsp");
 			} else {
 				dao.csDetailCounting(cs_num);
 				request.setAttribute("dto", dto);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("pageSize", pageSize);
 				request.setAttribute("sessionId", sessionId);
-				forward.setPath("CsDetailPage.jsp");
+				forward.setPath("WEB-INF/views/CsDetailPage.jsp");
 			}
 		}else {
 			dao.csDetailCounting(cs_num);
@@ -48,15 +45,9 @@ public class CsDetailPageAction implements Action {
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("pageSize", pageSize);
 			request.setAttribute("sessionId", sessionId);
-			forward.setPath("CsDetailPage.jsp");
+			forward.setPath("WEB-INF/views/CsDetailPage.jsp");
 
 		}
 		return forward;
 	}
 }
-//		System.out.println("dao 실행 완료");
-//		boolean isGet = false;
-//		Cookie[] cookies = request.getCookies();
-//		if(cookies != null) {
-//			
-//		}

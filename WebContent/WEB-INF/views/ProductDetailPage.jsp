@@ -36,7 +36,7 @@
 
 <body>
 <!-- Top -->
-<jsp:include page="WEB-INF/views/common/Top.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/Top.jsp"></jsp:include>
 
 <!-- 변수선언 -->
 <c:set var="product" value="${requestScope.product}"></c:set>
@@ -395,7 +395,7 @@
 	<!-- Modal for ask button ends  -->
 
 	<div class="mb-5"></div>
-	<jsp:include page="WEB-INF/views/common/Bottom.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/Bottom.jsp"></jsp:include>
 </body>
 
 <script>
@@ -429,9 +429,6 @@ $(document).ready(function() {
 						type:"post",
 						dataType:"html",  
 						success:function(responsedata, textStatus, xhr){
-							console.log(responsedata);
-							console.log(textStatus);
-							console.log(xhr);
 							$("#saleState").attr('class', 'btn btn-danger');
 							$("#saleState").html('판매완료');
 						},
@@ -448,9 +445,6 @@ $(document).ready(function() {
 						type:"post",
 						dataType:"html",  
 						success:function(responsedata, textStatus, xhr){
-							console.log(responsedata);
-							console.log(textStatus);
-							console.log(xhr);
 							$("#saleState").attr('class', 'btn btn-success');
 							$("#saleState").html('판매중');
 						},

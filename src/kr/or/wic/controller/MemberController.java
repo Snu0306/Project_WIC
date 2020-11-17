@@ -38,7 +38,6 @@ public class MemberController extends HttpServlet {
     	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
     	String url_Command = requestURI.substring(contextPath.length());
-    	System.out.println(url_Command);
     	String viewpage="";
     	
     	Action action = null;
@@ -49,23 +48,19 @@ public class MemberController extends HttpServlet {
     		forward = action.execute(request,response);
     	} else if (url_Command.equals("/signUpPage.my")) { //회원가입&로그인 겸용 페이지  
     		forward = new ActionForward();
-    		forward.setPath("loginRegister.jsp");
+    		forward.setPath("WEB-INF/views/loginRegister.jsp");
     	} else if (url_Command.equals("/signUp.my")) { //회원 가입 
-    		System.out.println("sign up.my");
     		action = new MemberRegisterAction();
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/checkId.my")) { //아이디체크
-    		System.out.println("checkId.my");
     		action = new MemberCheckIdAction();
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/signIn.my")) { //로그인 
-    		System.out.println("sign in.my");
     		action=new MemberLogInAction();
     		forward=action.execute(request, response);
     	} else if (url_Command.equals("/signOut.my")) { //로그아웃
     		forward = new ActionForward();
     		forward.setPath("/WEB-INF/views/MemberSignOut.jsp");
-    		System.out.println("signOut");
     	} else if (url_Command.equals("/myPage.my")) { //마이페이지 
     		action = new MyClosetPageAction();	
     		forward = action.execute(request, response);
@@ -90,8 +85,8 @@ public class MemberController extends HttpServlet {
     	}
     	
     	if(forward!=null) {
-    	RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
-    	dis.forward(request, response);
+	    	RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+	    	dis.forward(request, response);
     	}
     	
     }

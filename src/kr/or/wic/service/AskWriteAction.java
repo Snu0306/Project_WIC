@@ -11,7 +11,6 @@ public class AskWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		
 		String ch_title ="";
 		String ch_content ="";
 		if(request.getParameter("title") != null) {
@@ -23,7 +22,6 @@ public class AskWriteAction implements Action {
 		String id = (String) request.getSession().getAttribute("id");	//SessionID
 		int prd_num = Integer.parseInt(request.getParameter("prd_num")); // prd_num
 
-		
 		String msg;
 		String url;
 		
@@ -36,8 +34,7 @@ public class AskWriteAction implements Action {
 		request.setAttribute("url", url);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("Redirect.jsp");
-		System.out.println("AskAction 실행 완료");
+		forward.setPath("WEB-INF/views/Redirect.jsp");
 		return forward;
 	}
 }

@@ -13,13 +13,11 @@ import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
 import kr.or.wic.dao.ClosetDAO;
 import kr.or.wic.dao.MemberDAO;
-import kr.or.wic.dto.ClosetDTO;
 import kr.or.wic.dto.MemberDTO;
 
 public class MemberRegisterAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("member register action");
 		ClosetDAO closetDao = new ClosetDAO();
 		MemberDAO memberDao = new MemberDAO();
 		MemberDTO memberDto = new MemberDTO();
@@ -61,15 +59,12 @@ public class MemberRegisterAction implements Action{
 		if(result_closet!=0) {
 			result = memberDao.insertMember(memberDto);
 			
-			
 			if(result != 0) {
 				viewpage = "Main.jsp";
 			}else {
-				viewpage = "loginRegister.jsp";
+				viewpage = "WEB-INF/views/loginRegister.jsp";
 			}
-			
 		}
-		
 		ActionForward forward = new ActionForward();
 		forward.setPath(viewpage);
 		

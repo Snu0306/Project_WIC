@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
@@ -12,7 +11,6 @@ import kr.or.wic.dao.CustomerServiceDAO;
 import kr.or.wic.dto.CustomerServiceDTO;
 
 public class CsPageAction implements Action {
-
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 
@@ -63,11 +61,8 @@ public class CsPageAction implements Action {
 		request.setAttribute("id", id);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("CsPage.jsp");
-		System.out.println("CsPageAction실행 완료");
+		forward.setPath("WEB-INF/views/CsPage.jsp");
 
 		return forward;
-
 	}
-
 }

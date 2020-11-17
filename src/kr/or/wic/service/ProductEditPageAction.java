@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.wic.action.Action;
 import kr.or.wic.action.ActionForward;
-import kr.or.wic.dto.FilesDTO;
-import kr.or.wic.dto.MemberDTO;
-import kr.or.wic.dto.PriceFormat;
-import kr.or.wic.dto.ProductDTO;
 import kr.or.wic.dao.FilesDAO;
 import kr.or.wic.dao.MemberDAO;
 import kr.or.wic.dao.ProductDAO;
+import kr.or.wic.dto.FilesDTO;
+import kr.or.wic.dto.MemberDTO;
+import kr.or.wic.dto.ProductDTO;
 
 public class ProductEditPageAction implements Action{
 
@@ -57,10 +56,9 @@ public class ProductEditPageAction implements Action{
 		request.setAttribute("member", member);
 		
 		//이동경로(viewpage)
-		viewpage = "ProductEditPage.jsp";
+		viewpage = "WEB-INF/views/ProductEditPage.jsp";
 		forward.setPath(viewpage);
 		
 		return forward;
 	}
-
 }
