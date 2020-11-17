@@ -154,7 +154,7 @@
 													</c:when>	
 												 	<c:otherwise>	
 														<c:forEach var="cart" items="${cartList}">
-															<c:if test="${productList[i].prd_num != cart.prd_num}">
+															<c:if test="${productList``[i].prd_num != cart.prd_num}">
 																<button class="far fa-heart like" value="${productList[i].prd_num}"></button>
 																<span>${likeList[i]}</span>
 																<span><i class="fas fa-comment"></i>&nbsp;5</span>
