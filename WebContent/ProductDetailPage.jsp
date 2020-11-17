@@ -142,7 +142,17 @@
 							</c:choose>
 							<span id="cnt">${getLike}</span>
 						</div>
-						<button id="edit" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+						<button id="edit" class="btn btn-primary edit" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+
+						<!-- 판매 상태 변경 -->
+						<c:choose>
+							<c:when test="${saleState eq 0}">
+								<button id="saleState" class="btn btn-success" aria-hidden="true">판매중</button>
+							</c:when>
+							<c:otherwise>
+								<button id="saleState" class="btn btn-danger" aria-hidden="true">판매완료</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div class="mb-3">
@@ -156,7 +166,7 @@
 				</div>
 				
 				
-				
+				<!-- 문의사항 게시판 -->
 				<div class="mb-2 d-flex justify-content-between">
 					<span class="prdReply">채팅방</span> <a id="modalBtn"
 						href="<%= request.getContextPath()%>/Page.askProduct?prd_num=${product.prd_num}"
