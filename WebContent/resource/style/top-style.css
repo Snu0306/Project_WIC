@@ -172,13 +172,13 @@ nav ul li.btn-bar span.show:before{
 	
 	#topNav{
     z-index: 1;
-	padding : 9px 40px 9px 0;
+	padding : 9px 40px 9px 40px;
 	}
 	
 	#topNav ul div.nav-items{
-    z-index: -1;
+    z-index: 1999;
     position:fixed;
-	top:-340px;
+	top:-400px;
 	right:0;
 	width:100%;
 	background:#f2f2f2;
@@ -187,7 +187,7 @@ nav ul li.btn-bar span.show:before{
 }
     
     #topNav ul div.nav-items.show{
-        top:50px;
+        top:60px;
     }
 	
 	#topNav ul div.nav-items li{

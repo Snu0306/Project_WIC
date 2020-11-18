@@ -154,7 +154,7 @@
 													</c:when>	
 												 	<c:otherwise>	
 														<c:forEach var="cart" items="${cartList}">
-															<c:if test="${productList``[i].prd_num != cart.prd_num}">
+															<c:if test="${productList[i].prd_num != cart.prd_num}">
 																<button class="far fa-heart like" value="${productList[i].prd_num}"></button>
 																<span>${likeList[i]}</span>
 																<span><i class="fas fa-comment"></i>&nbsp;5</span>
@@ -176,7 +176,6 @@
 								<h6>판매목록이 없습니다.</h6>
 							</c:otherwise>
 						</c:choose>
->>>>>>> 64f834a7c2c40d047a30c682cf0ee8d2a42b6be3
 					</div>
 				</div>
 			</div>
