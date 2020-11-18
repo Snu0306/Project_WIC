@@ -41,7 +41,7 @@ public class CsWritePageAction implements Action{
 			String url = "/csPage.cs?currentPage="+currentPage+"&pageSize="+pageSize;
 			request.setAttribute("msg", "권한이 없습니다. 회원가입 후 이용해주세요.");
 			request.setAttribute("url", url);
-			forward.setPath("Redirect.jsp");
+			forward.setPath("/WEB-INF/views/Redirect.jsp");
 		}
 		return forward;
 	}

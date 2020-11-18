@@ -151,17 +151,28 @@
                      </c:choose>
                      <span id="cnt">${getLike}</span>
                   </div>
-                  <button id="edit" class="btn btn-primary"
-                     onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
-               </div>
-            </div>
-            <div class="mb-3">
+                  <button id="edit" class="btn btn-primary edit" onclick="location.href='<%=request.getContextPath()%>/ProductEditPage.Pd?prd_num=${product.prd_num}'">글수정</button>
+						<!-- 판매 상태 변경 -->
+						<c:choose>
+							<c:when test="${saleState eq 0}">
+								<button id="saleState" class="btn btn-success" aria-hidden="true">판매중</button>
+							</c:when>
+							<c:otherwise>
+								<button id="saleState" class="btn btn-danger" aria-hidden="true">판매완료</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+				<div class="mb-3">
                <h3 id="title">${product.prd_title}</h3>
             </div>
             <div class="mb-2">
                <h5 id="price">${price}<span id="location">${member.addr}</span>
                </h5>
             </div>
+
+
+            <!-- 상품문의 테이블 -->
             <div class="mb-4 description">${product.prd_content}</div>
             <div class="mb-2 d-flex justify-content-between">
                <span class="prdReply">채팅방</span> <a id="modalBtn"
@@ -174,7 +185,6 @@
 
             <div>
             <c:set var="dtos" value="${requestScope.chatRoomDTOs}"/>
-               <!-- 상품문의 테이블 -->
                <table class="table myTable">
                   <thead class="thead-light">
                      <tr>
@@ -312,11 +322,6 @@
                <div>
                   <div class="form-group"
                      style="width: 40%; float: left; margin-left: 10%;">
-                     <label for="comment"><span
-                        class="glyphicon glyphicon-eye-open"></span> 작성자</label> <input
-                        type="text" class="form-control" id="id" value="${member.name}"
-                        style="background: #eee;" readonly><br> 
-                        
                         <label
                         for="msg_content"><span
                         class="glyphicon glyphicon-eye-open"></span> 댓글</label> <input
@@ -361,56 +366,89 @@
 </script> -->
 <script>
 $(document).ready(function() {
-   if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {
-      $("#edit").hide();
-   }
-   
-   $("#heart").click(function(e) {
-      if('${id}' != '') {   
-         if($(this).hasClass('far fa-heart')){
-            $.ajax(
-               {
-                  url: "<%=request.getContextPath()%>/sendLike.Ajax",
-                  data:{send_id:'${id}', get_id:'${member.id}'},
-                  type:"post",
-                  dataType:"html",  
-                  success:function(responsedata, textStatus, xhr){
-                     $("#heart").attr('class', 'fas fa-heart');
-                     $("#cnt").html(responsedata);
-                  },
-                  error:function(xhr){
-                     alert(xhr.status + " : ERROR");
-                  }
-               }      
-            );
-            $(this).attr('class', 'fas fa-heart');         
-         } else {
-            $.ajax(
-               {
-                  url: "<%=request.getContextPath()%>/deleteLike.Ajax",
-                  data:{send_id:'<%=request.getSession().getAttribute("id")%>', get_id:'${member.id}'},
-                  type:"post",
-                  dataType:"html",  
-                  success:function(responsedata, textStatus, xhr){
-                     $("#heart").attr('class', 'far fa-heart');
-                     $("#cnt").html(responsedata);
-                  },
-                  error:function(xhr){
-                     alert(xhr.status + " : ERROR");
-                  }
-               }      
-            );         
-         }
-      }
-   });
+	if(!('${member.id}' == '${id}' || '${id}' == 'admin@admin.com')) {
+		$("#edit").hide();
+	} else {
+		$('#saleState').click(function(e) {
+			if($(this).hasClass('btn-success')){
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/notToSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#saleState").attr('class', 'btn btn-danger');
+							$("#saleState").html('판매완료');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			} else {
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/toSale.Ajax",
+						data:{prd_num:'${product.prd_num}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#saleState").attr('class', 'btn btn-success');
+							$("#saleState").html('판매중');
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}
+				)
+			}
+		});
+	};
+	
+	$("#heart").click(function(e) {
+		if('${id}' != '') {	
+			if($(this).hasClass('far fa-heart')){
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/sendLike.Ajax",
+						data:{send_id:'${id}', get_id:'${member.id}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#heart").attr('class', 'fas fa-heart');
+							$("#cnt").html(responsedata);
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}	   
+				);
+				$(this).attr('class', 'fas fa-heart');			
+			} else {
+				$.ajax(
+					{
+						url: "<%=request.getContextPath()%>/deleteLike.Ajax",
+						data:{send_id:'<%=request.getSession().getAttribute("id")%>', get_id:'${member.id}'},
+						type:"post",
+						dataType:"html",  
+						success:function(responsedata, textStatus, xhr){
+							$("#heart").attr('class', 'far fa-heart');
+							$("#cnt").html(responsedata);
+						},
+						error:function(xhr){
+							alert(xhr.status + " : ERROR");
+						}
+					}	   
+				);			
+			}
+		}
+	});
 });
 </script>
 <script>
 $(function(){
 
-	
-	
-	
     $('.ch_num').click(function(e){
     	$('#btn-msg-write').val($('.ch_num').val());
        $('#commentlist').empty();
@@ -490,20 +528,28 @@ $(function(){
 <style>
 .owner{
  text-align:left;
- background-color:red;
+ background-color:rgb(225,225,231);
  margin-bottom:2px;
  width:52%;
  float:left;
+ border-radius:25px;
+ color:black;
+ padding-left:10px;
+ margin-right:5%;
 }
 .owner::after{
 	clear:both;
 }
 .sender{
  text-align:right;
- background-color:yellow;
+ background-color:rgb(44,157,245);
  width:52%;
  float:right;
  margin-bottom:2px;
+ border-radius:25px;
+ color:white;
+ padding-right:10px;
+  margin-left:5%;
  
 }
 .sender::after{

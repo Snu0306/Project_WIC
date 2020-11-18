@@ -37,8 +37,6 @@ $(function(){
 		console.log(file);
 		thumbnail(file)
 		uploadFile(file)
-		
-		
 	});
 	
 	function uploadFile(file){
@@ -121,22 +119,6 @@ $(function(){
 		
 		
 	}));
-	
-	
-	function readFiles(file){
-		let reader = new FileReader();
-		reader.onload=function(e){
-			var bin = e.target.result;	
-			console.log(bin);
-			var formData = new FormData(); 
-			formData.append("filelist",bin)
-			
-			};
-		reader.readAsDataURL(file);
-	};
-	
-	
-	
 	
 	
 })

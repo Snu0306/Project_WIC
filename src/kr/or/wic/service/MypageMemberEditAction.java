@@ -45,7 +45,7 @@ public class MypageMemberEditAction implements Action{
 			} //파일 업로드 완료
 
 			
-			String id = multi.getParameter("id");
+			String id = multi.getParameter("id2");
 			String pwd = multi.getParameter("pwd");
 			String name = multi.getParameter("name");
 			String addr = multi.getParameter("addr");

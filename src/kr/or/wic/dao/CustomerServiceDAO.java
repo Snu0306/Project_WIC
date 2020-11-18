@@ -116,8 +116,8 @@ public class CustomerServiceDAO {
 		try {
 			conn  = ds.getConnection();
 			System.out.println("연결완료");
-			String sql = "insert into CUSTOMERSERVICE(CS_NUM, CS_REFER, CS_DEPTH, CS_STEP, CS_NOTICE, ID, CS_TITLE, CS_CONTENT, CS_COUNT, CS_DATE, CS_SECRET)\r\n" + 
-					"values(CUSTOMERSERVICE_CS_NUM.nextval,CUSTOMERSERVICE_CS_REFFER.nextval,0,0,?,?,?,?,0,SYSDATE,?)";
+			String sql = "insert into CUSTOMERSERVICE(CS_NUM, CS_REFER, CS_DEPTH, CS_STEP, CS_NOTICE, ID, CS_TITLE, CS_CONTENT, CS_COUNT, CS_DATE, CS_SECREt, Cs_DELETE)\r\n" + 
+					"values(CUSTOMERSERVICE_CS_NUM.nextval,CUSTOMERSERVICE_CS_REFER.nextval,0,0,?,?,?,?,0,SYSDATE,?,0)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, notice);
 			pstmt.setString(2, id);
